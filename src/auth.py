@@ -32,6 +32,3 @@ auth = Blueprint('auth', __name__)
 #         confirm_password = request.form.get("confirm_password")
 
 #     return render_template('register.html')#user=current_user
-
-
-
