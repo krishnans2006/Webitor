@@ -24,7 +24,6 @@ auth = Blueprint("auth", __name__)
 
 #     return render_template('login.html')#, user=current_user)
 
-
 # @auth.route('/logout')
 # @login_required
 # def logout():
