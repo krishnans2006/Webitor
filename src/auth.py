@@ -60,3 +60,19 @@ def register():
             flash("Successfully Registered!", category='success')
             return redirect(url_for("views.index"))
     return render_template('register.html')
+
+@auth.route('/create', methods=["GET", "POST"])
+def create():
+    if not session.get('logged_in'):
+        return redirect(url_for("auth.login"))
+    else:
+        styles = [{'style':'Cool Breeze'}, {'style':'Sun Rise'}, {'style':'Dark Mountains'}]
+        types = [{'type':'Test One'}, {'type':'Test Two'}, {'type':'Test Three'}]
+
+        if request.method == "POST":
+            web_name = request.form.get("web-name")
+            web_style = request.form.get("web-style")
+            web_type = request.form.get("web-type")
+            #READY TO ADD TO DATABASE
+        else:
+            return render_template('create.html', styles=styles, types=types)
