@@ -1,18 +1,27 @@
-{% extends "base.html" %}
-
-{% block title %}AlgoExperts{% endblock %}
-
-{% block content %}
+{% extends "base.html" %} {% block title %}AlgoExperts{% endblock %} {% block
+content %}
 <form method="POST">
-    <h3 align="center">Login</h3>
-    <div class="form-group">
-        <label for="email">Email or Username</label>
-        <input type="text" class="form-control" id="email" name="email" placeholder="Enter Email or Username:" />
-    </div>
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password:" />
-    </div>
-    <button type="submit" class="login-btn">Login</button>
+  <h3 align="center">Login</h3>
+  <div class="form-group">
+    <label for="email">Email or Username</label>
+    <input
+      type="text"
+      class="form-control"
+      id="email"
+      name="email"
+      placeholder="Enter Email or Username:"
+    />
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      id="password"
+      name="password"
+      placeholder="Enter Password:"
+    />
+  </div>
+  <button type="submit" class="login-btn">Login</button>
 </form>
 {% endblock %}
