@@ -12,6 +12,15 @@
 
 <body>
 	<div class="container-lg">
+		{% for message in get_flashed_messages() %}
+		{% if message[0] == "0" %}
+			<div class="alert alert-danger" role="alert">{{message[1:]}}</div>
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		{% else %}
+			<div class="alert alert-success" role="alert">{{message[1:]}}</div>
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		{% endif %}
+		{% endfor %}
 		{% block content %}{% endblock content %}
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
