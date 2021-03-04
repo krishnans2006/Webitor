@@ -64,6 +64,7 @@ def register():
 @auth.route('/create', methods=["GET", "POST"])
 def create():
     if not session.get('logged_in'):
+        flash("You must login to create a website!", category='error')
         return redirect(url_for("auth.login"))
     else:
         styles = [{'style':'Cool Breeze'}, {'style':'Sun Rise'}, {'style':'Dark Mountains'}]
@@ -74,5 +75,6 @@ def create():
             web_style = request.form.get("web-style")
             web_type = request.form.get("web-type")
             #READY TO ADD TO DATABASE
+            flash("Test Flash Message", category='success')
         else:
             return render_template('create.html', styles=styles, types=types)
