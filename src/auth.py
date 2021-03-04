@@ -1,10 +1,19 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
-# from .models import User
-from werkzeug.security import generate_password_hash, check_password_hash
+from flask import Blueprint
+from flask import flash
+from flask import redirect
+from flask import render_template
+from flask import request
+from flask import url_for
+from flask_login import current_user
+from flask_login import login_required
+from flask_login import login_user
+from flask_login import logout_user
+from werkzeug.security import check_password_hash
+from werkzeug.security import generate_password_hash
 # from . import db
-from flask_login import login_user, login_required, logout_user, current_user
+# from .models import User
 
-auth = Blueprint('auth', __name__)
+auth = Blueprint("auth", __name__)
 
 # @auth.route('/login', methods=["GET", "POST"])
 # def login():
@@ -14,7 +23,6 @@ auth = Blueprint('auth', __name__)
 #         pass
 
 #     return render_template('login.html')#, user=current_user)
-
 
 # @auth.route('/logout')
 # @login_required
@@ -32,6 +40,3 @@ auth = Blueprint('auth', __name__)
 #         confirm_password = request.form.get("confirm_password")
 
 #     return render_template('register.html')#user=current_user
-
-
-
