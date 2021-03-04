@@ -1,4 +1,3 @@
 # AlgoExperts
 
-## This is a test on editing the READ ME.
-I edited it
+## After cloning, move to the work directory and type pip install -r requirements.txt
