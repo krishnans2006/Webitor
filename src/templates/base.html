@@ -12,13 +12,13 @@
 
 <body>
 	<div class="container-lg">
-		{% for message in get_flashed_messages() %}
-		{% if message[0] == "0" %}
-			<div class="alert alert-danger" role="alert">{{message[1:]}}</div>
-			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-		{% else %}
-			<div class="alert alert-success" role="alert">{{message[1:]}}</div>
-			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		{% for category, message in get_flashed_messages(with_categories=true) %}
+		{% if category == "error" %}
+			<div class="alert alert-danger" role="alert">{{message}}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>
+			
+		{% elif category == "success" %}
+			<div class="alert alert-success" role="alert">{{message}}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>
+			
 		{% endif %}
 		{% endfor %}
 		{% block content %}{% endblock content %}
