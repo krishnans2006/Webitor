@@ -25,10 +25,10 @@ def login():
             session["logged_in"] = True
             session["username"] = result["Username"]
             session["email"] = result["Email"]
-            flash("You are successfully logged in!", category='success')
+            flash("1You are successfully logged in!")
             return redirect(url_for("views.index"))
         else:
-            flash("Invalid Username or Password!", category='error')
+            flash("0Invalid Username or Password!")
             return redirect(url_for("auth.login"))
     return render_template('login.html')
 
@@ -36,7 +36,7 @@ def login():
 @auth.route('/logout')
 def logout():
     session.clear()
-    flash("You have been successfully logged out!", category='success')
+    flash("1You have been successfully logged out!")
     return redirect(url_for("auth.login"))
 
 
@@ -49,22 +49,21 @@ def register():
         username = request.form.get("username")
         password = request.form.get("password")
         if len(email) < 4:
-            flash('Your email must be greater than 3 characters!', category='error')
+            flash('0Your email must be greater than 3 characters!')
         elif len(username) <= 5:
-            flash('Your username must be greater than 5 characters!',
-                  category='error')
+            flash('0Your username must be greater than 5 characters!')
         elif len(password) < 8:
-            flash('Your password should be 8 characters or more!', category='error')
+            flash('0Your password should be 8 characters or more!')
         else:
             d_signup(username, email, password=generate_password_hash(password))
-            flash("Successfully Registered!", category='success')
+            flash("1Successfully Registered!")
             return redirect(url_for("views.index"))
     return render_template('register.html')
 
 @auth.route('/create', methods=["GET", "POST"])
 def create():
     if not session.get('logged_in'):
-        flash("You must login to create a website!", category='error')
+        flash("0You must login to create a website!")
         return redirect(url_for("auth.login"))
     else:
         styles = [{'style':'Cool Breeze'}, {'style':'Sun Rise'}, {'style':'Dark Mountains'}]
@@ -75,6 +74,6 @@ def create():
             web_style = request.form.get("web-style")
             web_type = request.form.get("web-type")
             #READY TO ADD TO DATABASE
-            flash("Test Flash Message", category='success')
+            flash("1Test Flash Message")
         else:
             return render_template('create.html', styles=styles, types=types)
