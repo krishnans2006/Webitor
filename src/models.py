@@ -50,3 +50,26 @@ def d_signup(username, email, password):
         }
     )
     return True
+
+def d_create(username, sitename, html_code):
+    if db.collection("Sites").document(sitename).get().exists:
+        return False
+    db.collection("Sites").document(sitename).set(
+        {
+            "Sitename": sitename,
+            "Creator": db.document("Users/" + username),
+            "HTML": html_code
+        }
+    )
+    return True
+
+def d_edit(username, sitename, html_code):
+    if not db.collection("Sites").document(sitename).get().exists:
+        return False
+    if not get("Sites", sitename, "Creator").path.split("/")[1] == username:
+        return False
+    db.collection("Sites").document(sitename).update(
+        {
+            "HTML": html_code
+        }
+    )
