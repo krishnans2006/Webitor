@@ -35,9 +35,13 @@ def login():
 
 @auth.route('/logout')
 def logout():
-    session.clear()
-    flash("1You have been successfully logged out!")
-    return redirect(url_for("auth.login"))
+    if not session.get("logged_in"):
+        flash("0You are already logged out!")
+        return redirect(url_for('auth.login'))
+    else:
+        session.clear()
+        flash("1You have been successfully logged out!")
+        return redirect(url_for("auth.login"))
 
 
 @auth.route('/register', methods=["GET", "POST"])
@@ -59,6 +63,14 @@ def register():
             flash("1Successfully Registered!")
             return redirect(url_for("views.index"))
     return render_template('register.html')
+
+@auth.route('/projects', methods=["GET", "POST"])
+def projects():
+    if not session.get('logged_in'):
+        flash('0You must be logged in to view your projects!')
+        return redirect(url_for('auth.login'))
+    else:
+        return render_template('profile.html')
 
 @auth.route('/create', methods=["GET", "POST"])
 def create():
