@@ -15,7 +15,7 @@ def google_auth():
     token = request.form["idtoken"]
     try:
         idinfo = id_token.verify_oauth2_token(token, requests.Request(
-        ), "326034391861-2uic770g0ghkgd9oi8hhn6lruvvikp72.apps.googleusercontent.com")
+        ), "337745045052-c19u56smhk30nck0dat09vigoe7fcolf.apps.googleusercontent.com")
         result = d_gauth(idinfo["email"])
         if result:
             flash(f"You have successfully logged back in as {idinfo['email']}!", category='success')
