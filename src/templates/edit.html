@@ -1,1 +1,49 @@
-{% extends "base.html" %} {% block title %}AlgoExperts{% endblock %}
+{% extends "base.html" %} {% block title %}AlgoExperts{% endblock %} {% block
+content%}
+<html>
+  <head>
+    <style>
+      #div1 {
+        width: 350px;
+        height: 70px;
+        padding: 0px;
+        border: 1px solid #aaaaaa;
+      }
+    </style>
+    <script>
+      function allowDrop(ev) {
+        ev.preventDefault();
+      }
+
+      function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+      }
+
+      function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(data));
+      }
+    </script>
+  </head>
+  <body>
+    <p>Dragging images test</p>
+
+    <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <br />
+    <div
+      id="drag1"
+      style="
+        border: 1px solid red;
+        background-color: red;
+        width: 350px;
+        height: 70px;
+      "
+      draggable="true"
+      ondragstart="drag(event)"
+      width="336"
+      height="69"
+    ></div>
+  </body>
+</html>
+{% endblock %}
