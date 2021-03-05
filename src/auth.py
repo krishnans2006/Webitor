@@ -25,10 +25,10 @@ def login():
             session["logged_in"] = True
             session["username"] = result["Username"]
             session["email"] = result["Email"]
-            flash("1You are successfully logged in!")
+            flash("You are successfully logged in!", category='success')
             return redirect(url_for("views.index"))
         else:
-            flash("0Invalid Username or Password!")
+            flash("Invalid Username or Password!", category='error')
             return redirect(url_for("auth.login"))
     return render_template('login.html')
 
@@ -36,11 +36,11 @@ def login():
 @auth.route('/logout')
 def logout():
     if not session.get("logged_in"):
-        flash("0You are already logged out!")
+        flash("You are already logged out!", category='error')
         return redirect(url_for('auth.login'))
     else:
         session.clear()
-        flash("1You have been successfully logged out!")
+        flash("You have been successfully logged out!", category='success')
         return redirect(url_for("auth.login"))
 
 
@@ -53,14 +53,14 @@ def register():
         username = request.form.get("username")
         password = request.form.get("password")
         if len(email) < 4:
-            flash('0Your email must be greater than 3 characters!')
+            flash('Your email must be greater than 3 characters!', category='error')
         elif len(username) <= 5:
-            flash('0Your username must be greater than 5 characters!')
+            flash('Your username must be greater than 5 characters!', category='error')
         elif len(password) < 8:
-            flash('0Your password should be 8 characters or more!')
+            flash('Your password should be 8 characters or more!', category='error')
         else:
             d_signup(username, email, password=generate_password_hash(password))
-            flash("1Successfully Registered!")
+            flash("Successfully Registered!", category='error')
             return redirect(url_for("views.index"))
     return render_template('register.html')
 
@@ -80,7 +80,7 @@ def google_authorize():
 @auth.route('/projects', methods=["GET", "POST"])
 def projects():
     if not session.get('logged_in'):
-        flash('0You must be logged in to view your projects!')
+        flash('You must be logged in to view your projects!', category='error')
         return redirect(url_for('auth.login'))
     else:
         return render_template('profile.html')
@@ -88,7 +88,7 @@ def projects():
 @auth.route('/create', methods=["GET", "POST"])
 def create():
     if not session.get('logged_in'):
-        flash("0You must login to create a website!")
+        flash("You must login to create a website!", category='error')
         return redirect(url_for("auth.login"))
     else:
         styles = [{'style':'Cool Breeze'}, {'style':'Sun Rise'}, {'style':'Dark Mountains'}]
@@ -99,7 +99,7 @@ def create():
             web_style = request.form.get("web-style")
             web_type = request.form.get("web-type")
             #READY TO ADD TO DATABASE
-            flash("1Test Flash Message")
+            flash("Test Flash Message", category='success')
             # Add ID to database for editing later on
         else:
             return render_template('create.html', styles=styles, types=types)
@@ -108,7 +108,7 @@ def create():
 @auth.route('/edit', methods=["GET", "POST", "PUT", "DELETE"]) #<int:id>
 def edit():
     if not session.get('logged_in'):
-        flash("0You must be logged in to edit your projects!")
+        flash("You must be logged in to edit your projects!", category='error')
         return redirect(url_for('auth.login'))
     
     return render_template('edit.html')
