@@ -58,7 +58,8 @@ def d_create(username, sitename, html_code):
         {
             "Sitename": sitename,
             "Creator": db.document("Users/" + username),
-            "HTML": html_code
+            "HTML": html_code,
+            "Published": False
         }
     )
     return True
@@ -71,5 +72,16 @@ def d_edit(username, sitename, html_code):
     db.collection("Sites").document(sitename).update(
         {
             "HTML": html_code
+        }
+    )
+
+def d_publish(username, sitename):
+    if not db.collection("Sites").document(sitename).get().exists:
+        return False
+    if not get("Sites", sitename, "Creator").path.split("/")[1] == username:
+        return False
+    db.collection("Sites").document(sitename).update(
+        {
+            "Published": True
         }
     )
