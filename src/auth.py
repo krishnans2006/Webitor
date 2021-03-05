@@ -59,9 +59,12 @@ def register():
         elif len(password) < 8:
             flash('Your password should be 8 characters or more!', category='error')
         else:
-            d_signup(username, email, password=generate_password_hash(password))
-            flash("Successfully Registered!", category='error')
-            return redirect(url_for("views.index"))
+            if d_signup(username, email, password=password):
+                flash("Successfully Registered!", category='error')
+                flash(f"You are now logged in as {username}!", category='success')
+                return redirect(url_for("views.index"))
+            else:
+                flash("Someone is already registered with this username or password!", category='error')
     return render_template('register.html')
 
 @auth.route('/google/login')
