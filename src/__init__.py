@@ -1,4 +1,3 @@
-from authlib.integrations.flask_client.oauth_registry import OAuth
 from flask import Flask
 from os import path
 from authlib.integrations.flask_client import OAuth
