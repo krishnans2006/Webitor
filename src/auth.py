@@ -20,13 +20,13 @@ def google_auth():
         if result:
             flash(f"You have successfully logged back in as {idinfo['email']}!", category='success')
         else:
-            flash(f"Your account has successfully been created and you are now logged in as {idinfo['email']}!")
+            flash(f"Your account has successfully been created and you are now logged in as {idinfo['email']}!", category='success')
         session["logged_in"] = True
         session["g_auth"] = True
         session["email"] = idinfo["email"]
         return ""
     except ValueError:
-        flash("Your login was invalid! Make sure you have provided permissions to access your email address")
+        flash("Your login was invalid! Make sure you have provided permissions to access your email address", category='error')
         return ""
 
 
