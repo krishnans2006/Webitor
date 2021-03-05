@@ -5,9 +5,9 @@ from flask import render_template
 from flask import request
 from flask import url_for
 from flask import session
+from authlib.integrations.flask_client import OAuth
 from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
-
 from .models import *
 
 auth = Blueprint("auth", __name__)
@@ -64,6 +64,19 @@ def register():
             return redirect(url_for("views.index"))
     return render_template('register.html')
 
+@auth.route('/google/login')
+def google_login():
+    redirect_url = url_for('auth.google_authorize', _external=True)
+    return oauth.twitter.authorize_redirect(redirect_url)
+
+@auth.route('/google/authorize')
+def google_authorize():
+    token = oauth.twitter.authorize_access_token()
+    resp = oauth.twitter.get('account/verify_credentials.json')
+    profile = resp.json()
+
+    return redirect(url_for('views.index'))
+
 @auth.route('/projects', methods=["GET", "POST"])
 def projects():
     if not session.get('logged_in'):
@@ -87,5 +100,15 @@ def create():
             web_type = request.form.get("web-type")
             #READY TO ADD TO DATABASE
             flash("1Test Flash Message")
+            # Add ID to database for editing later on
         else:
             return render_template('create.html', styles=styles, types=types)
+
+
+@auth.route('/edit', methods=["GET", "POST", "PUT", "DELETE"]) #<int:id>
+def edit():
+    if not session.get('logged_in'):
+        flash("0You must be logged in to edit your projects!")
+        return redirect(url_for('auth.login'))
+    
+    return render_template('edit.html')
