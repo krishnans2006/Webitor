@@ -1,18 +1,27 @@
-from flask import Blueprint
-from flask import flash
-from flask import redirect
-from flask import render_template
-from flask import request
-from flask import url_for
-from flask import session
-from authlib.integrations.flask_client import OAuth
+from flask import Blueprint, flash, redirect, render_template, request, url_for, session
 from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
 from .models import *
 
+from google.oauth2 import id_token
+from google.auth.transport import requests
+
 auth = Blueprint("auth", __name__)
 
-
+@auth.route("/google-auth")
+def google_auth():  # <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    token = request.form["idtoken"]
+    print(token)
+    try:
+        idinfo = id_token.verify_oauth2_token(token, requests.Request(
+        ), "326034391861-2uic770g0ghkgd9oi8hhn6lruvvikp72.apps.googleusercontent.com")
+        print(idinfo)
+        userid = idinfo['sub']
+        print(userid)
+        useremail = idinfo["email"]
+        print(useremail)
+    except ValueError:
+        print("Oh No! Thingy thing failed :(") 
 @auth.route('/login', methods=["GET", "POST"])
 def login():
     if session.get("logged_in"):
@@ -67,18 +76,6 @@ def register():
                 flash("Someone is already registered with this username or password!", category='error')
     return render_template('register.html')
 
-@auth.route('/google/login')
-def google_login():
-    redirect_url = url_for('auth.google_authorize', _external=True)
-    return oauth.twitter.authorize_redirect(redirect_url)
-
-@auth.route('/google/authorize')
-def google_authorize():
-    token = oauth.twitter.authorize_access_token()
-    resp = oauth.twitter.get('account/verify_credentials.json')
-    profile = resp.json()
-
-    return redirect(url_for('views.index'))
 
 @auth.route('/projects', methods=["GET", "POST"])
 def projects():

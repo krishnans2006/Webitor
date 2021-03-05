@@ -34,5 +34,20 @@ content %}
   </div>
   <br />
   <button type="submit" class="register-btn">Submit</button>
+  <div class="g-signin2" data-onsuccess="onSignIn"></div>
 </form>
+
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script>
+  function onSignIn(googleUser) {
+    console.log("Signing In...");
+    var id_token = googleUser.getAuthResponse().id_token;
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://localhost:5000/google-auth");
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send("idtoken=" + id_token);
+    console.log("ID token sent:");
+    console.log(id_token);
+  }
+</script>
 {% endblock %}

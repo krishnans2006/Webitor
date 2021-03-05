@@ -8,7 +8,6 @@ firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 
-
 def get(coll, doc, field):
     return db.collection(coll).document(doc).get({field}).to_dict()[field]
 
