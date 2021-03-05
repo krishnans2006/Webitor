@@ -35,6 +35,13 @@ def d_login(email, password):
             return False
         return False
 
+def d_gauth(email):
+    if db.collection("Users").document(email).get().exists:
+        return True
+    db.collection("Users").document(email).set(
+        {}
+    )
+    return False
 
 def d_signup(username, email, password):
     if db.collection("Users").document(username).get().exists:

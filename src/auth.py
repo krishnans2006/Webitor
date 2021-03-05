@@ -8,20 +8,28 @@ from google.auth.transport import requests
 
 auth = Blueprint("auth", __name__)
 
-@auth.route("/google-auth")
-def google_auth():  # <div class="g-signin2" data-onsuccess="onSignIn"></div>
+@auth.route("/google-auth", methods=["GET", "POST"])
+def google_auth():
+    if request.method == "GET":
+        return redirect(url_for("views.login"))
     token = request.form["idtoken"]
-    print(token)
     try:
         idinfo = id_token.verify_oauth2_token(token, requests.Request(
         ), "326034391861-2uic770g0ghkgd9oi8hhn6lruvvikp72.apps.googleusercontent.com")
-        print(idinfo)
-        userid = idinfo['sub']
-        print(userid)
-        useremail = idinfo["email"]
-        print(useremail)
+        result = d_gauth(idinfo["email"])
+        if result:
+            flash(f"You have successfully logged back in as {idinfo['email']}!", category='success')
+        else:
+            flash(f"Your account has successfully been created and you are now logged in as {idinfo['email']}!")
+        session["logged_in"] = True
+        session["g_auth"] = True
+        session["email"] = idinfo["email"]
+        return ""
     except ValueError:
-        print("Oh No! Thingy thing failed :(") 
+        flash("Your login was invalid! Make sure you have provided permissions to access your email address")
+        return ""
+
+
 @auth.route('/login', methods=["GET", "POST"])
 def login():
     if session.get("logged_in"):
