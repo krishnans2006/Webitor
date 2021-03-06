@@ -47,7 +47,7 @@ def login():
         else:
             flash("Invalid Username or Password!", category='error')
             return redirect(url_for("auth.login"))
-    return render_template('login.html')
+    return render_template('Login/login.html')
 
 
 @auth.route('/logout')
@@ -82,7 +82,7 @@ def register():
                 return redirect(url_for("views.index"))
             else:
                 flash("Someone is already registered with this username or password!", category='error')
-    return render_template('register.html')
+    return render_template('Register/register.html')
 
 
 @auth.route('/projects', methods=["GET", "POST"])
@@ -110,7 +110,7 @@ def create():
             flash("Test Flash Message", category='success')
             # Add ID to database for editing later on
         else:
-            return render_template('create.html', styles=styles, types=types)
+            return render_template('Create/create.html', styles=styles, types=types)
 
 
 @auth.route('/edit', methods=["GET", "POST", "PUT", "DELETE"]) #<int:id>
@@ -119,4 +119,4 @@ def edit():
         flash("You must be logged in to edit your projects!", category='error')
         return redirect(url_for('auth.login'))
     
-    return render_template('edit.html')
+    return render_template('Edit/edit.html')

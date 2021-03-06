@@ -9,5 +9,5 @@ def index():
 
 @views.route('/about', methods=["GET", "POST"])
 def about():
-    return render_template('about.html')
+    return render_template('About/about.html')
 
