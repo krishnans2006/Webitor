@@ -4,5 +4,7 @@ function onSignIn(googleUser) {
     xhr.open("POST", "/google-auth");
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.send("idtoken=" + id_token);
-    window.location.reload(true);
+    xhr.addEventListener("load", function () {
+        window.location.reload(true);
+    });
 };
