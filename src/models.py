@@ -36,9 +36,9 @@ def d_login(email, password):
         return False
 
 def d_gauth(email):
-    if db.collection("Users").document(email).get().exists:
+    if db.collection("Google-Users").document(email).get().exists:
         return True
-    db.collection("Users").document(email).set(
+    db.collection("Google-Users").document(email).set(
         {}
     )
     return False
@@ -56,6 +56,11 @@ def d_signup(username, email, password):
         }
     )
     return True
+
+def d_get_sites(username, email):
+    if username:
+        return list(db.collection("Sites").where("Creator", "==", "Users/" + username).stream())
+    return list(db.collection("Sites").where("Creator", "==", "Google-Users/" + email).stream())
 
 def d_create(username, sitename, html_code):
     if db.collection("Sites").document(sitename).get().exists:
