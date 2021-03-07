@@ -1,9 +1,11 @@
 from flask import Flask
+from flask_talisman import Talisman
 from os import path
 from authlib.integrations.flask_client import OAuth
 
 def create_app():
   app = Flask(__name__)
+  Talisman(app)
   oauth = OAuth(app)
   # oauth.register(
 
