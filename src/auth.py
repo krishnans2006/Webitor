@@ -8,7 +8,7 @@ from google.auth.transport import requests
 
 auth = Blueprint("auth", __name__)
 
-@auth.route("/google-auth", methods=["GET", "POST"])
+@auth.route("/google-auth", methods=["GET", "POST"])  # https://github-flask.readthedocs.io/en/latest/
 def google_auth():
     if request.method == "GET":
         return redirect(url_for("views.login"))
