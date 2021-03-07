@@ -1,4 +1,4 @@
-from flask import Blueprint, flash, redirect, render_template, request, url_for, session
+from flask import Blueprint, flash, redirect, render_template, request, url_for, session, current_app
 from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
 from .models import *
@@ -8,14 +8,29 @@ from google.auth.transport import requests
 
 auth = Blueprint("auth", __name__)
 
-@auth.route("/google-auth", methods=["GET", "POST"])  # https://github-flask.readthedocs.io/en/latest/
+@auth.before_app_request
+def force_https():
+    if request.endpoint in current_app.view_functions and request.headers.get('X-Forwarded-Proto', None) == 'http':
+        return redirect(request.url.replace('http://', 'https://'))
+
+@auth.route('/google-signin', methods=["GET", "POST"])
+def google_signin():
+    if session.get("logged_in"):
+        flash("You are already signed in!", category='error')
+        return redirect(url_for('views.index'))
+    
+    return render_template('Google-Sign-In/google.html')
+
+@auth.route("/google-auth", methods=["GET", "POST"])
 def google_auth():
     if request.method == "GET":
-        return redirect(url_for("views.login"))
-    token = request.form["idtoken"]
+        return redirect(url_for("auth.login"))
+    token = request.form.get("idtoken")
+    print(token)
     try:
         idinfo = id_token.verify_oauth2_token(token, requests.Request(
         ), "337745045052-c19u56smhk30nck0dat09vigoe7fcolf.apps.googleusercontent.com")
+        print("Email", idinfo["email"])
         result = d_gauth(idinfo["email"])
         if result:
             flash(f"You have successfully logged back in as {idinfo['email']}!", category='success')
@@ -24,10 +39,10 @@ def google_auth():
         session["logged_in"] = True
         session["g_auth"] = True
         session["email"] = idinfo["email"]
-        return ""
+        return "Success!"
     except ValueError:
         flash("Your login was invalid! Make sure you have provided permissions to access your email address", category='error')
-        return ""
+        return "Error!"
 
 
 @auth.route('/login', methods=["GET", "POST"])
@@ -90,8 +105,7 @@ def projects():
     if not session.get('logged_in'):
         flash('You must be logged in to view your projects!', category='error')
         return redirect(url_for('auth.login'))
-    else:
-        return render_template('Profile/profile.html')
+    return render_template('Profile/profile.html', sites=d_get_sites(session.get("username"), session.get("email")))
 
 @auth.route('/create', methods=["GET", "POST"])
 def create():

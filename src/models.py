@@ -57,6 +57,11 @@ def d_signup(username, email, password):
     )
     return True
 
+def d_get_sites(username, email):
+    if username:
+        return list(db.collection("Sites").where("Creator", "==", "Users/" + username).stream())
+    return list(db.collection("Sites").where("Creator", "==", "Google-Users/" + email).stream())
+
 def d_create(username, sitename, html_code):
     if db.collection("Sites").document(sitename).get().exists:
         return False
