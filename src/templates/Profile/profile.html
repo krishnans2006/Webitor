@@ -19,8 +19,10 @@
     />
 
     <!-- Custom CSS-->
-    >
-    <link rel="stylesheet" href="profile.css" />
+    <link 
+    rel= "stylesheet" 
+    type= "text/css" 
+    href= "{{ url_for('static',filename='Profile/profile.css') }}">
     <title>Profile</title>
   </head>
   <body>
@@ -39,7 +41,7 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
-    <script src="profile.js"></script>
+    <script src="{{ url_for('static',filename='Profile/profile.js') }}"></script>
 
     <h1>Woah... A wild profile page...</h1>
   </body>

@@ -19,8 +19,10 @@
     />
 
     <!-- Custom CSS-->
-    >
-    <link rel="stylesheet" href="create.css" />
+    <link 
+    rel= "stylesheet" 
+    type= "text/css" 
+    href= "{{ url_for('static',filename='Create/create.css') }}">
     <title>Create</title>
   </head>
   <body>
@@ -39,7 +41,7 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
-    <script src="create.js"></script>
+    <script src="{{ url_for('static',filename='Create/create.js') }}"></script>
 
     <h1>Woah... A wild create page...</h1>
     <form class="form-inline" method="POST">

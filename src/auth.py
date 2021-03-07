@@ -91,7 +91,7 @@ def projects():
         flash('You must be logged in to view your projects!', category='error')
         return redirect(url_for('auth.login'))
     else:
-        return render_template('profile.html')
+        return render_template('Profile/profile.html')
 
 @auth.route('/create', methods=["GET", "POST"])
 def create():

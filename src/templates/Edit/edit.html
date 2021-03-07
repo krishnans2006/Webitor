@@ -19,8 +19,10 @@
     />
 
     <!-- Custom CSS-->
-    >
-    <link rel="stylesheet" href="edit.css" />
+    <link 
+    rel= "stylesheet" 
+    type= "text/css" 
+    href= "{{ url_for('static',filename='Edit/edit.css') }}">
     <title>Edit</title>
   </head>
   <body>
@@ -39,7 +41,7 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
-    <script src="edit.js" async defer></script>
+    <script src="{{ url_for('static',filename='Edit/edit.js') }}"></script>
 
     <h1>Woah... A wild edit page...</h1>
     <p>Dragging images test</p>
