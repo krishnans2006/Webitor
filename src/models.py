@@ -8,6 +8,7 @@ firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 
+
 def get(coll, doc, field):
     return db.collection(coll).document(doc).get({field}).to_dict()[field]
 
@@ -35,6 +36,7 @@ def d_login(email, password):
             return False
         return False
 
+
 def d_gauth(email):
     if db.collection("Google-Users").document(email).get().exists:
         return True
@@ -43,10 +45,12 @@ def d_gauth(email):
     )
     return False
 
+
 def d_signup(username, email, password):
     if db.collection("Users").document(username).get().exists:
         return False
-    email_match = list(db.collection("Users").where("Email", "==", email).limit(1).stream())
+    email_match = list(db.collection("Users").where(
+        "Email", "==", email).limit(1).stream())
     if email_match:
         return False
     db.collection("Users").document(username).set(
@@ -55,6 +59,37 @@ def d_signup(username, email, password):
             "Password": generate_password_hash(password)
         }
     )
+    return True
+
+
+def d_delete(username, email, password):
+    print(username, email, password)
+    if username:
+        if not check_password_hash(get("Users", username, "Password"), password):
+            return False
+        user_sites = list(db.collection("Sites").where(
+            "Creator", "==", db.collection("Users").document(username)).stream())
+        print(user_sites, "Users/" + username)
+        for site in user_sites:
+            db.collection("Sites").document(site.id).delete()
+        db.collection("Users").document(username).delete()
+        return True
+    user_sites = list(db.collection("Sites").where(
+        "Creator", "==", db.collection("Google-Sites").document(email)).stream())
+    print(user_sites, "Users/" + username)
+    for site in user_sites:
+        db.collection("Sites").document(site.id).delete()
+    db.collection("Google-Users").document(email).delete()
+    return True
+
+def d_change_pwd(username, old, new):
+    if not username:
+        return False
+    if not check_password_hash(get("Users", username, "Password"), old):
+        return False
+    db.collection("Users").document(username).update({
+        "Password": generate_password_hash(new)
+    })
     return True
 
 def d_get_sites(username, email):

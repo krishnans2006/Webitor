@@ -16,7 +16,6 @@ def force_https():
 @auth.route('/google-signin', methods=["GET", "POST"])
 def google_signin():
     if session.get("logged_in"):
-        flash("You are already signed in!", category='error')
         return redirect(url_for('views.index'))
     
     return render_template('Google-Sign-In/google.html')
@@ -57,23 +56,12 @@ def login():
             session["logged_in"] = True
             session["username"] = result["Username"]
             session["email"] = result["Email"]
-            flash("You are successfully logged in!", category='success')
+            flash(f"You are now logged in as {session['username']}!", category='success')
             return redirect(url_for("views.index"))
         else:
             flash("Invalid Username or Password!", category='error')
             return redirect(url_for("auth.login"))
     return render_template('Login/login.html')
-
-
-@auth.route('/logout')
-def logout():
-    if not session.get("logged_in"):
-        flash("You are already logged out!", category='error')
-        return redirect(url_for('auth.login'))
-    else:
-        session.clear()
-        flash("You have been successfully logged out!", category='success')
-        return redirect(url_for("auth.login"))
 
 
 @auth.route('/register', methods=["GET", "POST"])
@@ -87,17 +75,63 @@ def register():
         if len(email) < 4:
             flash('Your email must be greater than 3 characters!', category='error')
         elif len(username) <= 5:
-            flash('Your username must be greater than 5 characters!', category='error')
+            flash('Your username must be greater than 5 characters!',
+                  category='error')
         elif len(password) < 8:
             flash('Your password should be 8 characters or more!', category='error')
         else:
             if d_signup(username, email, password=password):
-                flash("Successfully Registered!", category='error')
-                flash(f"You are now logged in as {username}!", category='success')
+                session["logged_in"] = True
+                session["username"] = username
+                session["email"] = email
+                flash(
+                    f"Successfully Registered as {username}!", category='success')
+                flash(
+                    f"You are now logged in as  {username}!", category='success')
                 return redirect(url_for("views.index"))
             else:
-                flash("Someone is already registered with this username or password!", category='error')
+                flash(
+                    "Someone is already registered with this username or password!", category='error')
     return render_template('Register/register.html')
+
+
+@auth.route('/logout')
+def logout():
+    if not session.get("logged_in"):
+        flash("You are already logged out!", category='error')
+        return redirect(url_for('auth.login'))
+    else:
+        session.clear()
+        flash("You have been successfully logged out!", category='success')
+        return redirect(url_for("auth.login"))
+
+@auth.route('/change-password', methods=["GET", "POST"])
+def change_password():
+    if request.method == "POST":
+        old_pass = request.form.get('current-password')
+        new_pass = request.form.get('new-password') 
+        result = d_change_pwd(session.get("username"), old_pass, new_pass)
+        if result:
+            flash("Password has been changed!", category='success')
+            return redirect(url_for('views.index'))
+        flash("Password change has failed", category='error')
+        return redirect(url_for('views.index'))
+    return render_template('Change/change.html')
+
+@auth.route('/delete-account', methods=["GET", "POST"])
+def delete_account():
+    if request.method == "POST":
+        password = request.form.get('password')
+        confirm_password = request.form.get('confirm-password')
+
+        if d_delete(session.get("username"), session.get("email"), password):
+            session.clear()
+            flash("Account deleted!", category="success")
+            return redirect(url_for('auth.register'))
+        else:
+            flash("Account deletion unsuccessful!", category="error")
+            return redirect(url_for("auth.delete_account"))
+    return render_template('Delete/delete.html')
 
 
 @auth.route('/projects', methods=["GET", "POST"])
