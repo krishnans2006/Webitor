@@ -1,5 +1,4 @@
-from flask import Blueprint, render_template, request, flash, jsonify
-import json
+from flask import Blueprint, render_template
 
 views = Blueprint('views', __name__)
 

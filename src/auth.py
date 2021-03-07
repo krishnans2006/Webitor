@@ -1,6 +1,4 @@
 from flask import Blueprint, flash, redirect, render_template, request, url_for, session, current_app
-from werkzeug.security import check_password_hash
-from werkzeug.security import generate_password_hash
 from .models import *
 
 from google.oauth2 import id_token
@@ -132,39 +130,3 @@ def delete_account():
             flash("Account deletion unsuccessful!", category="error")
             return redirect(url_for("auth.delete_account"))
     return render_template('Delete/delete.html')
-
-
-@auth.route('/projects', methods=["GET", "POST"])
-def projects():
-    if not session.get('logged_in'):
-        flash('You must be logged in to view your projects!', category='error')
-        return redirect(url_for('auth.login'))
-    return render_template('Profile/profile.html', sites=d_get_sites(session.get("username"), session.get("email")))
-
-@auth.route('/create', methods=["GET", "POST"])
-def create():
-    if not session.get('logged_in'):
-        flash("You must login to create a website!", category='error')
-        return redirect(url_for("auth.login"))
-    else:
-        styles = [{'style':'Cool Breeze'}, {'style':'Sun Rise'}, {'style':'Dark Mountains'}]
-        types = [{'type':'Test One'}, {'type':'Test Two'}, {'type':'Test Three'}]
-
-        if request.method == "POST":
-            web_name = request.form.get("web-name")
-            web_style = request.form.get("web-style")
-            web_type = request.form.get("web-type")
-            #READY TO ADD TO DATABASE
-            flash("Test Flash Message", category='success')
-            # Add ID to database for editing later on
-        else:
-            return render_template('Create/create.html', styles=styles, types=types)
-
-
-@auth.route('/edit', methods=["GET", "POST", "PUT", "DELETE"]) #<int:id>
-def edit():
-    if not session.get('logged_in'):
-        flash("You must be logged in to edit your projects!", category='error')
-        return redirect(url_for('auth.login'))
-    
-    return render_template('Edit/edit.html')
