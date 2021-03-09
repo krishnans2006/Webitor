@@ -34,6 +34,32 @@
         <title>Profile</title>
     </head>
     <body>
+
+        <h1>Woah... A wild profile page...</h1>
+        <div class="container-lg">
+        <!-- Displays User Alerts --> 
+        {% for category, message in get_flashed_messages(with_categories=true) %}
+        {% if category == "error" %}
+        <div class="alert alert-danger" role="alert">
+            {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> 
+        </div>
+
+        {% elif category == "success" %} 
+        <div class="alert alert-success" role="alert"> 
+            {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        {% endif %} {% endfor %}
+
+        <!-- Content -->
+        {% for site in sites %}
+        {{site.id}} - {{site.to_dict()["Creator"]}}, Published:
+        {{site.to_dict()["Published"]}}
+        {% endfor %}
+        </div> 
+
         <script
             src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -48,35 +74,6 @@
             crossorigin="anonymous"></script>
         <script src="{{url_for('static', filename='Index/index.js')}}"></script>
         <script src="{{ url_for('static',filename='Profile/profile.js') }}"></script>
-        
-        <!-- Displays User Alerts -->
-        {% for category, message in get_flashed_messages(with_categories=true)
-        %}
-        {% if category == "error" %}
-        <div class="alert alert-danger" role="alert">
-            {{message}}<button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="alert"
-                aria-label="Close"></button>
-        </div>
-
-        {% elif category == "success" %}
-        <div class="alert alert-success" role="alert">
-            {{message}}<button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="alert"
-                aria-label="Close"></button>
-        </div>
-
-        {% endif %} {% endfor %}
-
-        <h1>Woah... A wild profile page...</h1>
-        {% for site in sites %}
-        {{site.id}} - {{site.to_dict()["Creator"]}}, Published:
-        {{site.to_dict()["Published"]}}
-        {% endfor %}
     </body>
 </html>
 {% endblock content %}

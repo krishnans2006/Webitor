@@ -2,4 +2,3 @@ Flask
 firebase-admin
 Authlib
 gunicorn
-flask-talisman

@@ -19,7 +19,7 @@ const droppables = {
 function code_send() {
     console.log("Sending!")
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/edit");
+    xhr.open("POST", "/edit/"+document.getElementById("sitename").innerHTML);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.send("code=" + document.getElementById("code").value);
     // xhr.addEventListener("load", function () {

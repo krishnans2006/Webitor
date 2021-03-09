@@ -7,12 +7,7 @@ def create_app():
     app.config['SECRET_KEY'] = "]'/.;[pl,mkoijnbhuygvcftrdxzsewaq"
     app.config["SESSION_COOKIE_PATH"] = '/'
 
-    from .views import views
-    from .auth import auth
-    from .sites import sites
+    from .site import site
 
-    app.register_blueprint(views, url_prefix="/")
-    app.register_blueprint(auth, url_prefix="/")
-    app.register_blueprint(sites, url_prefix='/')
-
+    app.register_blueprint(site, url_prefix='/')
     return app
