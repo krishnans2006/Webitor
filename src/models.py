@@ -102,7 +102,6 @@ def d_create(username, sitename, html_code):
         return False
     db.collection("Sites").document(sitename).set(
         {
-            "Sitename": sitename,
             "Creator": db.document("Users/" + username),
             "HTML": html_code,
             "Published": False
@@ -120,6 +119,16 @@ def d_edit(username, sitename, html_code):
             "HTML": html_code
         }
     )
+
+
+def d_get_site(username, email, sitename):
+    owner_id = username if username else email
+    print(owner_id, sitename)
+    if not db.collection("Sites").document(sitename).get().exists:
+        return False
+    if not get("Sites", sitename, "Creator").path.split("/")[1] == owner_id:
+        return False
+    return [sitename, db.collection("Sites").document(sitename)]
 
 def d_publish(username, sitename):
     if not db.collection("Sites").document(sitename).get().exists:

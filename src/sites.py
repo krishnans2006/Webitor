@@ -1,4 +1,5 @@
 from flask import Blueprint, flash, redirect, render_template, request, url_for, session, current_app
+from .models import *
 
 sites = Blueprint('sites', __name__)
 
@@ -58,10 +59,15 @@ def create():
             return render_template('Create/create.html', styles=styles, types=types)
 
 
-@sites.route('/edit', methods=["GET", "POST", "PUT", "DELETE"])
-def edit():
+@sites.route('/edit/<sitename>', methods=["GET", "POST"])
+def edit(sitename=None):
     if not session.get('logged_in'):
         flash("You must be logged in to edit your projects!", category='error')
         return redirect(url_for('auth.login')) 
-
-    return render_template('Edit/edit.html')
+    if not sitename:
+        flash("An Internal Error Occured! This has been reported and will be resolved soon. Thanks for the patience!", category="error")
+    if request.method == "POST":
+        new_code = request.form.get("code")
+        print(new_code)
+    site = d_get_site(session.get("Username"), session.get("Email"), sitename)
+    return render_template('Edit/edit.html', name=site[0], code=site[1]["HTML"])

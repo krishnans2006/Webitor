@@ -1,5 +1,6 @@
-{% extends "Base/base.html" %} {% block title %}AlgoExperts{% endblock title %}
+{% block title %} AlgoExperts {% endblock title %}
 {%block content %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -18,11 +19,17 @@
       crossorigin="anonymous"
     />
 
+    <!-- Flash Messages -->
+    <link type="text/css" 
+    href="{{url_for('static', filename='style.css')}}" 
+    />
+
     <!-- Custom CSS-->
     <link 
       rel= "stylesheet" 
       type= "text/css" 
       href= "{{ url_for('static',filename='About/about.css') }}">
+
     <title>About</title>
   </head>
   <body>
@@ -41,9 +48,32 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
+    <script src="{{url_for('static', filename='Index/index.js')}}"></script>
     <script src="{{url_for('static', filename='About/about.js')}}"></script>
 
-    <h1>Woah... A wild about page...</h1>
+    <!-- Displays User Alerts -->
+    {% for category, message in get_flashed_messages(with_categories=true) %}
+      {% if category == "error" %}
+      <div class="alert alert-danger" role="alert">
+        {{message}}<button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      {% elif category == "success" %}
+      <div class="alert alert-success" role="alert">
+        {{message}}<button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      {% endif %} {% endfor %}
   </body>
 </html>
 {% endblock content %}

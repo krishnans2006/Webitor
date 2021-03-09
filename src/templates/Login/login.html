@@ -1,5 +1,6 @@
-{% extends "Base/base.html" %} {% block title %}AlgoExperts{% endblock title %}
+{% block title %} AlgoExperts {% endblock title %}
 {%block content %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -18,11 +19,18 @@
       crossorigin="anonymous"
     />
 
+    <!-- Flash Messages -->
+    <link type="text/css" 
+    href="{{url_for('static', filename='style.css')}}" 
+    />
+
     <!-- Custom CSS-->
     <link 
     rel= "stylesheet" 
     type= "text/css" 
-    href= "{{ url_for('static',filename='Login/login.css') }}">
+    href= "{{ url_for('static',filename='Login/login.css') }}"
+    />
+    
     <title>Login</title>
   </head>
   <body>
@@ -42,6 +50,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="{{url_for('static', filename='Index/index.js')}}"></script>
     <script src="{{ url_for('static',filename='Login/login.js') }}"></script>
 
     <h1>Woah... A wild login page...</h1>
