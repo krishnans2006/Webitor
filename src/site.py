@@ -179,8 +179,14 @@ def create():
             web_name = request.form.get("web-name")
             web_style = request.form.get("web-style")
             web_type = request.form.get("web-type")
-            flash(f"You chose {web_name} {web_style} {web_type}!", category='success')
-            return redirect(url_for("site.projects"))
+
+            
+            if d_create(session.get("username"), session.get("email"), web_name, gen_code):
+                flash(f"You chose {web_name} {web_style} {web_type}!", category='success')
+                return redirect(url_for("site.edit", sitename=web_name))
+            else:
+                flash(f"A site with this name already exists! Please try again with another sitename.", category='error')
+                return redirect(url_for("site.create"))
         else:
             return render_template('Create/create.html', styles=styles, types=types)
 

@@ -97,16 +97,25 @@ def d_get_sites(username, email):
         return list(db.collection("Sites").where("Creator", "==", "Users/" + username).stream())
     return list(db.collection("Sites").where("Creator", "==", "Google-Users/" + email).stream())
 
-def d_create(username, sitename, html_code):
+def d_create(username, email, sitename, html_code):
     if db.collection("Sites").document(sitename).get().exists:
         return False
-    db.collection("Sites").document(sitename).set(
-        {
-            "Creator": db.document("Users/" + username),
-            "HTML": html_code,
-            "Published": False
-        }
-    )
+    if username:
+        db.collection("Sites").document(sitename).set(
+            {
+                "Creator": db.document("Users/" + username),
+                "HTML": html_code,
+                "Published": False
+            }
+        )
+    else:
+        db.collection("Sites").document(sitename).set(
+            {
+                "Creator": db.document("Google-Users/" + email),
+                "HTML": html_code,
+                "Published": False
+            }
+        )
     return True
 
 def d_edit(username, email, sitename, html_code):

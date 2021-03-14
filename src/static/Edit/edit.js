@@ -22,7 +22,4 @@ function code_send() {
     xhr.open("POST", "/edit/"+document.getElementById("sitename").innerHTML);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.send("code=" + document.getElementById("code").value);
-    // xhr.addEventListener("load", function () {
-    //     window.location.reload(true);
-    // });
 }
