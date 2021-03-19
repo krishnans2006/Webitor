@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <meta charset="UTF-8">
+  <style>
+#moving {
+  position: relative;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+}
+
+</style>
+</head>
+
+<body bgcolor={{c}}>
+  <form method="POST">
+  <input type='text' name="b">
+  </form>
+  <button id="moving" class="button">button</button>
+
+
+  <script>
+    let currentDroppable = null;
+    var shiftX = 0;
+    var shiftY = 0;
+    moving.onmousedown = function(event) {
+
+      shiftX = event.clientX - moving.getBoundingClientRect().left;
+      shiftY = event.clientY - moving.getBoundingClientRect().top;
+
+      moving.style.position = 'absolute';
+      moving.style.zIndex = 1000;
+      document.body.append(moving);
+
+      moveAt(event.pageX, event.pageY);
+
+      function moveAt(pageX, pageY) {
+        moving.style.left = pageX - shiftX + 'px';
+        moving.style.top = pageY - shiftY + 'px';
+        console.log('x :'+(moving.style.left).toString())
+        console.log('y :'+(moving.style.top).toString())
+      }
+
+      function onMouseMove(event) {
+        moveAt(event.pageX, event.pageY);
+
+        moving.hidden = true;
+        let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+        moving.hidden = false;
+
+        if (!elemBelow) return;
+
+        let droppableBelow = elemBelow.closest('.droppable');
+        if (currentDroppable != droppableBelow) {
+          if (currentDroppable) { // null when we were not over a droppable before this event
+            leaveDroppable(currentDroppable);
+          }
+          currentDroppable = droppableBelow;
+          if (currentDroppable) { // null if we're not coming over a droppable now
+            // (maybe just left the droppable)
+            enterDroppable(currentDroppable);
+          }
+        }
+      }
+
+      document.addEventListener('mousemove', onMouseMove);
+
+      moving.onmouseup = function() {
+        document.removeEventListener('mousemove', onMouseMove);
+        moving.onmouseup = null;
+      };
+
+    };
+
+    function enterDroppable(elem) {
+      elem.style.background = 'pink';
+    }
+
+    function leaveDroppable(elem) {
+      elem.style.background = '';
+    }
+
+    moving.ondragstart = function() {
+      console.log((pageX - shiftX).toString())
+      return false;
+    };
+    function myFunc() {
+    console.log(moving.style.left)
+    $.post( "/3", {
+      js_data: moving.style.left+' '+moving.style.top
+      });
+      window.location = '/3'
+    }
+
+
+  </script>
+<button onclick="myFunc()"> submit </button>
+</body>
+</html>
