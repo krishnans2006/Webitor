@@ -151,6 +151,8 @@ def projects():
 
 @site.route('/create', methods=["GET", "POST"])
 def create():
+    styles = ['Cool-Breeze', 'Sunrise', 'Dark-Mountain']
+    types = ['Test', 'Test2']
     if not session.get('logged_in'):
         flash("You must login to create a website!", category='error')
         return redirect(url_for("site.login"))
