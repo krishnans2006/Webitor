@@ -23,3 +23,10 @@ function code_send() {
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.send("code=" + document.getElementById("code").value);
 }
+
+$(document).ready(function () {
+    Vvveb.Builder.init('demo/index.html', function () {
+        //load code after page is loaded here
+        Vvveb.Gui.init();
+    });
+});

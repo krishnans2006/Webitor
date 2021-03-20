@@ -1,6 +1,6 @@
 from flask import Blueprint, flash, redirect, render_template, request, url_for, session, current_app
 from .models import *
-
+from .generator import *
 from google.oauth2 import id_token
 from google.auth.transport import requests
 import os
@@ -140,22 +140,6 @@ def delete_account():
             return redirect(url_for("site.delete_account"))
     return render_template('Delete/delete.html')
 
-themes = {
-    "Cool Breeze": "",
-    "Sunrise": "",
-    "Dark Mountains": ""
-}
-
-types = {
-    "Simple Text": "",
-    "Cards": ""
-}
-
-boilerplate = [
-    "",
-    "",
-    ""
-]
 
 @site.route('/projects', methods=["GET", "POST"])
 def projects():
@@ -171,18 +155,13 @@ def create():
         flash("You must login to create a website!", category='error')
         return redirect(url_for("site.login"))
     else:
-        styles = [{'style': 'Cool Breeze'}, {
-            'style': 'Sun Rise'}, {'style': 'Dark Mountains'}]
-        types = [{'type': 'Test One'}, {
-            'type': 'Test Two'}, {'type': 'Test Three'}]
-
         if request.method == "POST":
+            username = session.get("username")
+            email = session.get('email')
             web_name = request.form.get("web-name")
             web_style = request.form.get("web-style")
             web_type = request.form.get("web-type")
-
-            
-            if d_create(session.get("username"), session.get("email"), web_name, gen_code):
+            if d_create(username, email, web_name, generator(web_style, web_type)):
                 flash(f"You chose {web_name} {web_style} {web_type}!", category='success')
                 return redirect(url_for("site.edit", sitename=web_name))
             else:
