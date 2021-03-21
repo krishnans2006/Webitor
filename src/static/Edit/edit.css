@@ -1,13 +1,32 @@
-#div1 {
-    width: 350px;
-    height: 70px;
-    padding: 0px;
-    border: 1px solid #aaaaaa;
+#content {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 5px;
 }
 
-#drag1 {
-    border: 1px solid red;
-    background-color: red;
-    width: 350px;
-    height: 70px;
+#dom-tree {
+  flex: 30%;
+  margin: 0;
+  border: 1px solid black;
+}
+
+#page {
+  flex: 70%;
+  margin-left: 5px;
+  border: 1px solid black;
+}
+
+#highlight {
+  position: absolute;
+  background-color: blue;
+  opacity: 0.4;
+  text-align: center;
+  border: 1px solid red;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.dom-element.selected {
+  background-color: yellow;
 }
