@@ -23,7 +23,7 @@ def make_sth(q,type='button',x=str(0),y=str(0),text=''):
 def close_time():
     global f
     f.close()
-
+    read_file('a')
 def change_color(color='white'):
     global f
     f.close()

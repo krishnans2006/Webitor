@@ -5,13 +5,13 @@ from google.oauth2 import id_token
 from google.auth.transport import requests
 import os
 from import_me import *
-site = Blueprint("site", __name__)
 f = open('src/templates/Trial.html', 'w')
 f.write('''
 <html>
 <body bgcolor=white>
 ''')
 f.close()
+site = Blueprint("site", __name__)
 @site.route('/', methods=["GET", "POST"])
 def index():
     return render_template('Index/index.html')
@@ -213,6 +213,7 @@ def builder():
                 read_file('a')
             else:
                 close_time()
+                read_file('a')
         except:
             read_file('a')
     return render_template('builder.html')
