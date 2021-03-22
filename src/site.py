@@ -6,7 +6,12 @@ from google.auth.transport import requests
 import os
 from import_me import *
 site = Blueprint("site", __name__)
-
+f = open('src/templates/Trial.html', 'w')
+f.write('''
+<html>
+<body bgcolor=white>
+''')
+f.close()
 @site.route('/', methods=["GET", "POST"])
 def index():
     return render_template('Index/index.html')
@@ -187,27 +192,28 @@ def edit(sitename=None):
     site = d_get_site(session.get("username"), session.get("email"), sitename)
     return render_template('Edit/edit.html', name=site[0], code=site[1]["HTML"])
 
-@site.route('/2',methods=['POST','GET'])
-def basicStuff():
-    global color
-    if request.method=="POST":
-        color = request.form.get('color')
-        add_color(color)
-        return redirect(url_for('site.front'))
-    return render_template('index.html')
-
-@site.route('/home3',methods=['POST','GET'])
-@site.route('/3',methods=['POST','GET'])
-def front():
-    global color
-    q=0
+q=0
+@site.route('/builder',methods=['POST','GET'])
+def builder():
+    global q
     if request.method == "POST":
-        data = request.form['js_data']
-        x,y = data.split(' ')
-        use_button(q=q,text='button',x=x,y=y)
-        q+=1
-        print(color)
-        os.system("start src/templates/Trial.html")
-        return redirect(url_for('site.basicStuff'))
-    return render_template('dragndrop_trial.html',c=color)
+        try:
+            type=request.form['tag']
+            X=request.form['X']
+            y=request.form['y']
+            t= request.form['text']
+            color=request.form['color']
+            if color:
+                print(color)
+                change_color(color)
+            elif type != 'stop' and type != 'read':
+                make_sth(type=type,x=X,y=y,q=q,text=t)
+                q+=1
+            elif type=='read':
+                read_file('a')
+            else:
+                close_time()
+        except:
+            read_file('a')
+    return render_template('builder.html')
 

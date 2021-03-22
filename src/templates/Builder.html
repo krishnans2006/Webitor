@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Builder</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#dialog" ).dialog({
+      autoOpen: false,
+      show: {
+        effect: "blind",
+        duration: 1000
+      },
+      hide: {
+        effect: "explode",
+        duration: 1000
+      }
+    });
+
+    $( "#opener" ).on( "click", function() {
+      $( "#dialog" ).dialog( "open" );
+    });
+  } );
+  </script>
+</head>
+<body>
+
+<div id="dialog" title="X Y Form">
+  <form method="post">
+      Type : <select id="tags" name="tag">
+                <option value="Button">Button</option>
+                <option value="input">Input</option>
+                <option value="h1">Heading</option>
+                <option value="Text">Normal Text</option>
+                <option value="stop">Save</option>
+                <option value="read">read</option>
+
+              </select></br>
+      text    : <input type="text" placeholder="Your Test goes here" name="text"></input></br>
+      X    : <input type="number" value="0" name="X"></input></br>
+      Y    : <input type="number" value="0" name="y"></input></br>
+      Color : <input type="text" placeholder="white" name="color">
+      <input type="submit">
+  </form>
+</div>
+<button id="opener">New</button>
+</body>
+</html>
