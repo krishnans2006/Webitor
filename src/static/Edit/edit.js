@@ -26,6 +26,11 @@ function code_send() {
     xhr.send("code=" + document.getElementById("code").value);
 }
 
+window.onload = function () {
+    document.getElementById("preview").innerHTML = document.getElementById("code").value
+    createDomTree();
+}
+
 // THE CULPRITS
 
 var domTree = document.getElementById("dom-tree");
