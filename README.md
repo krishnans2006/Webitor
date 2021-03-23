@@ -14,7 +14,7 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install the req
 git clone https://github.com/KrishnanS2006/AlgoExperts.git
 pip install requirements.txt
 python main.py
-echo Wow this is an amazing application!
+echo Wow this is an amazing application.
 ```
 
 ## Usage
@@ -49,7 +49,7 @@ def backend_construction(modules, web_provider, database):
   </head>
   <body>
     <div class="First of all">
-      <div class="We used many different things to supply our FrontEnd">
+      <div class="We used many different things to supply our Frontend">
         <div class="These things can range from: ">
           <ul>
             <li>Using Pure HTML and CSS</li>
@@ -84,7 +84,9 @@ def backend_construction(modules, web_provider, database):
 
 [Heroku](https://www.heroku.com/)
 
-[Firebase](https://firebase.google.com/) [Python](https://www.python.org/)
+[Firebase](https://firebase.google.com/)
+
+[Python](https://www.python.org/)
 
 [Javascript](https://www.javascript.com/)
 
