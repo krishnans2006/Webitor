@@ -1,16 +1,16 @@
 from flask import Blueprint, flash, redirect, render_template, request, url_for, session, current_app
 from .models import *
-# from .generator import *
+from generator import generator
 from google.oauth2 import id_token
 from google.auth.transport import requests
 import os
-from import_me import *
-f = open('src/templates/Trial.html', 'w')
-f.write('''
-<html>
-<body bgcolor=white>
-''')
-f.close()
+from  trial import *
+# f = open('src/templates/Trial.html', 'w')
+# f.write('''
+# <html>
+# <body bgcolor=white>
+# ''')
+# f.close()
 site = Blueprint("site", __name__)
 @site.route('/', methods=["GET", "POST"])
 def index():
@@ -163,12 +163,11 @@ def create():
         return redirect(url_for("site.login"))
     else:
         if request.method == "POST":
-            username = session.get("username")
-            email = session.get('email')
             web_name = request.form.get("web-name")
             web_style = request.form.get("web-style")
             web_type = request.form.get("web-type")
-            if d_create(username, email, web_name, generator(web_style, web_type)):
+            gen_code = generator(web_style, web_type)
+            if d_create(session.get('username'), session.get('email'), web_name, gen_code):
                 flash(f"You chose {web_name} {web_style} {web_type}!", category='success')
                 return redirect(url_for("site.edit", sitename=web_name))
             else:
