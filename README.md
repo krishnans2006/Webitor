@@ -100,13 +100,13 @@ Please make sure it is a neccessary change!
 
 ## Creators
 
-![Krishnan Shankar](https://github-readme-stats.vercel.app/api?KrishnanS2006=anuraghazra&show_icons=true&theme=dark)
+![Krishnan Shankar](https://github-readme-stats.vercel.app/api?username=KrishnanS2006&show_icons=true&theme=dark)
 
-![Alfie Phillips](https://github-readme-stats.vercel.app/api?AlfiePhillips=anuraghazra&show_icons=true&theme=radical)
+![Alfie Phillips](https://github-readme-stats.vercel.app/api?username=AlfiePhillips&show_icons=true&theme=radical)
 
-![Oscar Frederiksen](https://github-readme-stats.vercel.app/api?oscarscfrederiksen=anuraghazra&show_icons=true&theme=merko)
+![Oscar Frederiksen](https://github-readme-stats.vercel.app/api?username=oscarscfrederiksen&show_icons=true&theme=merko)
 
-![Akki](https://github-readme-stats.vercel.app/api?akshit22sept=anuraghazra&show_icons=true&theme=gruvbox)
+![Akki](https://github-readme-stats.vercel.app/api?username=akshit22sept&show_icons=true&theme=gruvbox)
 
 ## License
 
