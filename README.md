@@ -98,6 +98,16 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 Please make sure it is a neccessary change!
 
+## Creators
+
+![Krishnan Shankar](https://github-readme-stats.vercel.app/api?KrishnanS2006=anuraghazra&show_icons=true&theme=dark)
+
+![Alfie Phillips](https://github-readme-stats.vercel.app/api?AlfiePhillips=anuraghazra&show_icons=true&theme=radical)
+
+![Oscar Frederiksen](https://github-readme-stats.vercel.app/api?oscarscfrederiksen=anuraghazra&show_icons=true&theme=merko)
+
+![Akki](https://github-readme-stats.vercel.app/api?akshit22sept=anuraghazra&show_icons=true&theme=gruvbox)
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
