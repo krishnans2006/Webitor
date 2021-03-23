@@ -2,5 +2,4 @@ Flask
 firebase-admin
 Authlib
 gunicorn
-werkzeug-security
 html5print
