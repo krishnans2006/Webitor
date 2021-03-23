@@ -106,7 +106,7 @@ Please make sure it is a neccessary change!
 
 ![Oscar Frederiksen](https://github-readme-stats.vercel.app/api?username=oscarscfrederiksen&show_icons=true&theme=merko)
 
-![Akki](https://github-readme-stats.vercel.app/api?username=akshit22sept&show_icons=true&theme=gruvbox)(https://github.com/KrishnanS2006/)
+![Akki](https://github-readme-stats.vercel.app/api?username=akshit22sept&show_icons=true&theme=gruvbox)
 
 ## License
 
