@@ -4,7 +4,7 @@ from generator import generator
 from google.oauth2 import id_token
 from google.auth.transport import requests
 import os
-from import_me import *
+from  trial import *
 # f = open('src/templates/Trial.html', 'w')
 # f.write('''
 # <html>
