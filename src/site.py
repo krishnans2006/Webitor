@@ -5,12 +5,7 @@ from google.oauth2 import id_token
 from google.auth.transport import requests
 import os
 from  trial import *
-# f = open('src/templates/Trial.html', 'w')
-# f.write('''
-# <html>
-# <body bgcolor=white>
-# ''')
-# f.close()
+
 site = Blueprint("site", __name__)
 @site.route('/', methods=["GET", "POST"])
 def index():
