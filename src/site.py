@@ -1,6 +1,6 @@
 from flask import Blueprint, flash, redirect, render_template, request, url_for, session, current_app
 from .models import *
-from generator import generator
+# from generator import generator
 from google.oauth2 import id_token
 from google.auth.transport import requests
 import os

@@ -1,20 +1,39 @@
-const checkables = {
-    "Navbar": function(text) { return ""; },
-    "Contact-Form": function(text) { return ""; },
-    "Footer": function(text) { return ""; },
+const items = {
+    "Navbar": function (args) { return "<p>A Navbar I guess???</p>"; },
+    "Contact-Form": function (args) { return ""; },
+    "Footer": function (args) { return ""; },
+    "Button": function (args) { return '<button>' + args[0] + '</button>'; },
+    "Link": function (args) { return '<a>' + args[0] + '</a>'; },
+    "Image": function (args) { return ''; },
+    "Line-Break": function (args) { return "<br>"; },
+    "Testimonial": function (args) { return ""; },
+    "Inner-Section": function (args) { return ""; },
+    "Text-Editor": function (args) { return ""; },
+    "Video": function (args) { return ""; },
+    "Google-Maps": function (args) { return ""; }
 }
 
-const droppables = {
-    "Link": function(text) { return '<i>${text}</i>'; },
-    "Image": function(source, w=400, h=400, alt="A beautiful image") { return '<img src="${source} width="${w} height="${h}" alt=${alt} />'; },
-    "Line-Break": function() { return "<br>"; },
-    "Testimonial": function(text) { return ""; },
-    "Inner-Section": function() { return ""; },
-    "Text-Editor": function() { return ""; },
-    "Video": function(link, w=400, h=400) { return ""; },
-    "Google-Maps": function() { return ""; }
+function insertAtCursor(item, args=[]) {
+    myValue = items[item](args);
+    myField = document.getElementById("code")
+    if (document.selection) {
+        myField.focus();
+        sel = document.selection.createRange();
+        sel.text = myValue;
+    } else if (myField.selectionStart || myField.selectionStart == '0') {
+        var startPos = myField.selectionStart;
+        var endPos = myField.selectionEnd;
+        myField.value = myField.value.substring(0, startPos)
+            + myValue
+            + myField.value.substring(endPos, myField.value.length);
+        myField.selectionStart = startPos + myValue.length;
+        myField.selectionEnd = startPos + myValue.length;
+    } else {
+        myField.value += myValue;
+    }
+    document.getElementById("preview").innerHTML = document.getElementById("code").value
+    createDomTree();
 }
-
 
 function code_send() {
     document.getElementById("preview").innerHTML = document.getElementById("code").value
