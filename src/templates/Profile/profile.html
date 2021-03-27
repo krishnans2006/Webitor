@@ -43,6 +43,18 @@
 
         <!-- Content -->
         <div class="row row-cols-3 row-cols-md-2 g-4">
+            <div class="col">
+                <a href="/create" style="text-decoration: none; color: #212529;">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{site.id}}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted" style="display: inline;">
+                                {{site.to_dict()["Creator"].id}}&ensp;•&ensp;{{"" if site.to_dict()["Published"] else "Not
+                                "}}Published</h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
             {% for site in sites %}
             <div class="col">
                 <a href="/edit/{{site.id}}" style="text-decoration: none; color: #212529;">
