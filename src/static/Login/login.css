@@ -174,7 +174,7 @@
     text-decoration-color: rgb(102, 102, 102);
     text-decoration-line: none;
     text-decoration-style: solid;
-    text-deocration-thickness: auto;
+    text-decoration-thickness: auto;
     text-rendering: optimizelegibility;
     text-size-adjust: 100%;
     transition-delay: 0s, 0s;
@@ -234,7 +234,7 @@
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
     border-top-style: none;
-    boder-top-width: 0px;
+    border-top-width: 0px;
     box-sizing: border-box;
     color: rgb(255, 255, 255);
     cursor: pointer;
