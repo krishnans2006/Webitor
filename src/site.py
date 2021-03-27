@@ -59,15 +59,20 @@ def login():
         email = request.form.get('email')
         password = request.form.get('password')
         result = d_login(email, password)
-        if result:
-            session["logged_in"] = True
-            session["username"] = result["Username"]
-            session["email"] = result["Email"]
-            flash(f"You are now logged in as {session['username']}!", category='success')
-            return redirect(url_for("site.index"))
+        if email != '' and password != '':
+            if result:
+                session["logged_in"] = True
+                session["username"] = result["Username"]
+                session["email"] = result["Email"]
+                flash(f"You are now logged in as {session['username']}!", category='success')
+                return redirect(url_for("site.index"))
+            else:
+                flash("Invalid Username or Password!", category='error')
+                return redirect(url_for("site.login"))
         else:
-            flash("Invalid Username or Password!", category='error')
-            return redirect(url_for("site.login"))
+            flash("Please fill in the empty fields!")
+            return redirect(url_for('site.login'))
+            
     return render_template('Login/login.html')
 
 
