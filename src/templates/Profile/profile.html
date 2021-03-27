@@ -31,7 +31,6 @@
     <title>Profile</title>
   </head>
   <body>
-    <h1>Woah... A wild profile page...</h1>
     <div class="container-lg">
       <!-- Displays User Alerts -->
       {% for category, message in get_flashed_messages(with_categories=true) %}
@@ -62,8 +61,10 @@
       {% endif %} {% endfor %}
 
       <!-- Content -->
-      {% for site in sites %} {{site.id}} - {{site.to_dict()["Creator"]}},
-      Published: {{site.to_dict()["Published"]}} {% endfor %}
+      {% for site in sites %}
+      <a href="/edit/{{site.id}}">{{site.id}}</a> - {{site.to_dict()["Creator"].id}}, Published: {{site.to_dict()["Published"]}}
+      <br>
+      {% endfor %}
     </div>
 
     <script
