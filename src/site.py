@@ -59,7 +59,7 @@ def login():
         email = request.form.get('email')
         password = request.form.get('password')
         result = d_login(email, password)
-        if email != '' and password != '':
+        if email and password:
             if result:
                 session["logged_in"] = True
                 session["username"] = result["Username"]
@@ -70,9 +70,10 @@ def login():
                 flash("Invalid Username or Password!", category='error')
                 return redirect(url_for("site.login"))
         else:
-            flash("Please fill in the empty fields!")
+            flash("Please fill in the empty fields!", category="error")
+            print("Hello")
             return redirect(url_for('site.login'))
-            
+
     return render_template('Login/login.html')
 
 
