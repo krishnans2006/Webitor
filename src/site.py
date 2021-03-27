@@ -186,10 +186,10 @@ def edit(sitename=None):
     site = d_get_site(session.get("username"), session.get("email"), sitename)
     return render_template('Edit/edit.html', name=site[0], code=site[1]["HTML"])
 
-q=0
+
 @site.route('/builder',methods=['POST','GET'])
 def builder():
-    global q
+    q = 0
     if request.method == "POST":
         try:
             type=request.form['tag']

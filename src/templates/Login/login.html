@@ -2,83 +2,135 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
 
     <!-- Flash Messages -->
     <link type="text/css" href="{{url_for('static', filename='style.css')}}" />
 
     <!-- Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='Login/login.css') }}" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static',filename='Login/login.css') }}"
+    />
 
     <title>Login</title>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <h1>Woah... A wild login page...</h1>
     <div class="container-lg">
-        <!-- Displays User Alerts -->
-        {% for category, message in get_flashed_messages(with_categories=true) %} {% if category == "error" %}
-        <div class="alert alert-danger alert-dismissible" role="alert">
-            <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
-            {{message}}
-        </div>
+      <!-- Displays User Alerts -->
+      {% for category, message in get_flashed_messages(with_categories=true) %}
+      {% if category == "error" %}
+      <div class="alert alert-danger alert-dismissible" role="alert">
+        <span
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+          ><span aria-hidden="true">&times;</span></span
+        >
+        {{message}}
+      </div>
 
-        {% elif category == "success" %}
-        <div class="alert alert-success alert-dismissible" role="alert">
-            <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
-            {{message}}
-        </div>
+      {% elif category == "success" %}
+      <div class="alert alert-success alert-dismissible" role="alert">
+        <span
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+          ><span aria-hidden="true">&times;</span></span
+        >
+        {{message}}
+      </div>
 
-        {% endif %} {% endfor %}
-        <div class="header">
-            <h2 class="header-title">Webitor</h2>
-        </div>
-        <div class="container">
-            <div class="inner-container">
-                <form method="POST">
-                    <h1 class="content-title">Log Into my account</h1>
-                    <button class="block-button google-sign-in-button" href="/google-signin">
-    <img src="https://d3e54v103j8qbb.cloudfront.net/img/dashboard/google-icon.9285495463.svg" width="15" height="15"/>
-    <span>Sign in with Google</span>
-    </button>
-                    <p class="separation-text">or</p>
-                    <input placeholder="Email or Username" type="text" class="block-input" id="email" name="email">
-                    <input type="password" class="block-input" placeholder="Password" id="password" name="password">
-                    <button class="block-button submit" type="submit">
-    <span class="login-text">Log In</span>
-    </button>
-                    <div class="bottom-links">
-                        <div class="smalltext-left">
-                            <p class="smalltext-container">
-                                <a class="smalltext">Don't have an account?</a>
-                            </p>
-                        </div>
-                        <div class="smalltext-right">
-                            <p class="smalltext-container">
-                                <a class="smalltext">Forgot password?</a>
-                            </p>
-                        </div>
-                    </div>
-                </form>
+      {% endif %} {% endfor %}
+      <div class="header">
+        <h2 class="header-title">Webitor</h2>
+      </div>
+      <div class="container">
+        <div class="inner-container">
+          <form method="POST" name="login_form" onsubmit="required()">
+            <h1 class="content-title">Log Into my account</h1>
+            <button
+              class="block-button google-sign-in-button"
+              href="/google-signin"
+            >
+              <img
+                src="https://d3e54v103j8qbb.cloudfront.net/img/dashboard/google-icon.9285495463.svg"
+                width="15"
+                height="15"
+              />
+              <span>Sign in with Google</span>
+            </button>
+            <p class="separation-text">or</p>
+            <input
+              placeholder="Email or Username"
+              type="text"
+              class="block-input"
+              id="email"
+              name="email"
+            />
+            <input
+              type="password"
+              class="block-input"
+              placeholder="Password"
+              id="password"
+              name="password"
+            />
+            <button class="block-button submit" type="submit">
+              <span class="login-text">Log In</span>
+            </button>
+            <div class="bottom-links">
+              <div class="smalltext-left">
+                <p class="smalltext-container">
+                  <a class="smalltext">Don't have an account?</a>
+                </p>
+              </div>
+              <div class="smalltext-right">
+                <p class="smalltext-container">
+                  <a class="smalltext">Forgot password?</a>
+                </p>
+              </div>
             </div>
+          </form>
         </div>
-
+      </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="{{url_for('static', filename='Index/index.js')}}"></script>
     <script src="{{ url_for('static',filename='Login/login.js') }}"></script>
-</body>
-
+  </body>
 </html>
 {% endblock content %}
