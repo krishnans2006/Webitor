@@ -59,15 +59,21 @@ def login():
         email = request.form.get('email')
         password = request.form.get('password')
         result = d_login(email, password)
-        if result:
-            session["logged_in"] = True
-            session["username"] = result["Username"]
-            session["email"] = result["Email"]
-            flash(f"You are now logged in as {session['username']}!", category='success')
-            return redirect(url_for("site.index"))
+        if email and password:
+            if result:
+                session["logged_in"] = True
+                session["username"] = result["Username"]
+                session["email"] = result["Email"]
+                flash(f"You are now logged in as {session['username']}!", category='success')
+                return redirect(url_for("site.index"))
+            else:
+                flash("Invalid Username or Password!", category='error')
+                return redirect(url_for("site.login"))
         else:
-            flash("Invalid Username or Password!", category='error')
-            return redirect(url_for("site.login"))
+            flash("Please fill in the empty fields!", category="error")
+            print("Hello")
+            return redirect(url_for('site.login'))
+
     return render_template('Login/login.html')
 
 
@@ -186,10 +192,10 @@ def edit(sitename=None):
     site = d_get_site(session.get("username"), session.get("email"), sitename)
     return render_template('Edit/edit.html', name=site[0], code=site[1]["HTML"])
 
-q=0
+
 @site.route('/builder',methods=['POST','GET'])
 def builder():
-    global q
+    q = 0
     if request.method == "POST":
         try:
             type=request.form['tag']
