@@ -2,78 +2,135 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
 
     <!-- Flash Messages -->
-    <link type="text/css" href="{{url_for('static', filename='Alerts/alerts.css')}}" />
+    <link
+      type="text/css"
+      href="{{url_for('static', filename='Alerts/alerts.css')}}"
+    />
 
     <!-- Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='Register/register.css') }}" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static',filename='Register/register.css') }}"
+    />
 
     <title>Register</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <!-- Displays User Alerts -->
-    {% for category, message in get_flashed_messages(with_categories=true) %} {% if category == "error" %}
+    {% for category, message in get_flashed_messages(with_categories=true) %} {%
+    if category == "error" %}
     <div classs="container p-5 full-alert">
-        <div class="row no-gutters fixed-bottom">
-            <div class="alert alert-gradient shadow" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true" style="color:#fff">&times;</span>
-                        </button>
-                <h4 class="alert-heading-gradient">Uh, oh!</h4>
-                <p class="lead mb-0">{{message}}</p>
-            </div>
+      <div class="row no-gutters fixed-bottom">
+        <div class="alert alert-gradient shadow" role="alert">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true" style="color: #fff">&times;</span>
+          </button>
+          <h4 class="alert-heading-gradient">Uh, oh!</h4>
+          <p class="lead mb-0">{{message}}</p>
         </div>
+      </div>
     </div>
 
     {% elif category == "success" %}
     <div classs="container p-5 full-alert">
-        <div class="row no-gutters fixed-bottom">
-            <div class="alert alert-gradient shadow" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true" style="color:#fff">&times;</span>
-                        </button>
-                <h4 class="alert-heading-gradient">Uh, oh!</h4>
-                <p class="lead mb-0">{{message}}</p>
-            </div>
+      <div class="row no-gutters fixed-bottom">
+        <div class="alert alert-gradient shadow" role="alert">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true" style="color: #fff">&times;</span>
+          </button>
+          <h4 class="alert-heading-gradient">Uh, oh!</h4>
+          <p class="lead mb-0">{{message}}</p>
         </div>
+      </div>
     </div>
 
     {% endif %} {% endfor %}
 
     <form method="POST" name="register_form" onsubmit="required()">
-        <h3 align="center">Register yourself</h3>
-        <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email:" />
-        </div>
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username:" />
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password:" />
-        </div>
-        <br />
-        <button type="submit" class="register-btn">Submit</button>
+      <h3 align="center">Register yourself</h3>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          placeholder="Enter Email:"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          class="form-control"
+          id="username"
+          name="username"
+          placeholder="Enter Username:"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          placeholder="Enter Password:"
+          required
+        />
+      </div>
+      <br />
+      <button type="submit" class="register-btn">Submit</button>
     </form>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="{{url_for('static', filename='Index/index.js')}}"></script>
     <script src="{{ url_for('static',filename='Register/register.js') }}"></script>
-</body>
-
+  </body>
 </html>
 {% endblock content %}
