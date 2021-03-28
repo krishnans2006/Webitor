@@ -8,11 +8,10 @@
             shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <!-- Flash Messges -->
-    <link type="text/css" href="{{url_for('static', filename='style.css')}}" />
+    <link type="text/css" href="{{url_for('static', filename='Alerts/alerts.css')}}" />
 
     <!-- Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='Index/index.css') }}">
@@ -23,9 +22,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">Webitor</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -39,8 +36,7 @@
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link disabled" tabindex="-1" aria-disabled="true"
-                            style="cursor: not-allowed;">Create Site</a>
+                        <a class="nav-link disabled" tabindex="-1" aria-disabled="true" style="cursor: not-allowed;">Create Site</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link disabled" tabindex="-1" aria-disabled="true" style="cursor: not-allowed;">My
@@ -51,8 +47,7 @@
                 <ul class="navbar-nav mb-2 mb-lg-0">
                     {% if session.get("logged_in") %}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             My Account
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -77,19 +72,30 @@
     </nav>
     <div class="container-lg">
         <!-- Displays User Alerts -->
-        {% for category, message in get_flashed_messages(with_categories=true) %}
-        {% if category == "error" %}
-        <div class="alert alert-danger alert-dismissible" role="alert">
-            <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                    aria-hidden="true">&times;</span></span>
-            {{message}}
+        {% for category, message in get_flashed_messages(with_categories=true) %} {% if category == "error" %}
+        <div classs="container p-5 full-alert">
+            <div class="row no-gutters fixed-bottom">
+                <div class="alert alert-gradient shadow" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true" style="color:#fff">&times;</span>
+                        </button>
+                    <h4 class="alert-heading-gradient">Uh, oh!</h4>
+                    <p class="lead mb-0">{{message}}</p>
+                </div>
+            </div>
         </div>
 
         {% elif category == "success" %}
-        <div class="alert alert-success alert-dismissible" role="alert">
-            <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                    aria-hidden="true">&times;</span></span>
-            {{message}}
+        <div classs="container p-5 full-alert">
+            <div class="row no-gutters fixed-bottom">
+                <div class="alert alert-gradient shadow" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true" style="color:#fff">&times;</span>
+                        </button>
+                    <h4 class="alert-heading-gradient">Uh, oh!</h4>
+                    <p class="lead mb-0">{{message}}</p>
+                </div>
+            </div>
         </div>
 
         {% endif %} {% endfor %}
@@ -97,9 +103,7 @@
         <!-- Content -->
 
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
     <script src="{{url_for('static', filename='Index/index.js')}}"></script>
 </body>
 

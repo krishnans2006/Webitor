@@ -1,0 +1,23 @@
+.alert-gradient {
+    background: linear-gradient(to top right, #e66465, #9198e5);
+    border: none;
+    color: #fff;
+    border-radius: 0px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.alert-heading-gradient {
+    color: #fff;
+    font-weight: 900;
+}
+
+.alert {
+    width: 97%;
+    /*height:100px;*/
+    margin: 0 auto;
+}
+
+.lead {
+    font-size: 20px;
+}
