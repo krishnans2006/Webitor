@@ -2,75 +2,60 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
     <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous"
-    />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+
+    <!-- Flash Messages -->
+    <link type="text/css" href="{{url_for('static', filename='Alerts/alerts.css')}}" />
 
     <!-- Custom CSS-->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{ url_for('static',filename='Edit/edit.css') }}"
-    />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='Edit/edit.css') }}" />
 
     <title>Edit</title>
-  </head>
+</head>
 
-  <body>
-    <h1>Woah... A wild edit page...</h1>
+<body>
     <div class="container-lg">
-      <!-- Displays User Alerts -->
-      {% for category, message in get_flashed_messages(with_categories=true) %}
-      {% if category == "error" %}
-      <div class="alert alert-danger alert-dismissible" role="alert">
-        <span
-          type="button"
-          class="close"
-          data-dismiss="alert"
-          aria-label="Close"
-          ><span aria-hidden="true">&times;</span></span
-        >
-        {{message}}
-      </div>
+        <!-- Displays User Alerts -->
+        {% for category, message in get_flashed_messages(with_categories=true) %} {% if category == "error" %}
+        <div classs="container p-5 full-alert">
+            <div class="row no-gutters fixed-bottom">
+                <div class="alert alert-gradient shadow" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true" style="color:#fff">&times;</span>
+                        </button>
+                    <h4 class="alert-heading-gradient">Uh, oh!</h4>
+                    <p class="lead mb-0">{{message}}</p>
+                </div>
+            </div>
+        </div>
 
-      {% elif category == "success" %}
-      <div class="alert alert-success alert-dismissible" role="alert">
-        <span
-          type="button"
-          class="close"
-          data-dismiss="alert"
-          aria-label="Close"
-          ><span aria-hidden="true">&times;</span></span
-        >
-        {{message}}
-      </div>
+        {% elif category == "success" %}
+        <div classs="container p-5 full-alert">
+            <div class="row no-gutters fixed-bottom">
+                <div class="alert alert-gradient shadow" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true" style="color:#fff">&times;</span>
+                        </button>
+                    <h4 class="alert-heading-gradient">Uh, oh!</h4>
+                    <p class="lead mb-0">{{message}}</p>
+                </div>
+            </div>
+        </div>
 
-      {% endif %} {% endfor %}
+        {% endif %} {% endfor %}
 
-      <!-- Content -->
-      <h2 id="sitename">{{name}}</h2>
-      <div style="display: flex; min-height: 100%">
-        <div id="code-div" style="width: 45%; height: 75%; min-height: 400px">
-          <textarea
-            id="code"
-            class="form-control"
-            onkeyup="code_send();"
-            rows="23"
-            cols="100"
-            style="height: 100%"
-          >
+        <!-- Content -->
+        <h2 id="sitename">{{name}}</h2>
+        <div style="display: flex; min-height: 100%">
+            <div id="code-div" style="width: 45%; height: 75%; min-height: 400px">
+                <textarea id="code" class="form-control" onkeyup="code_send();" rows="23" cols="100" style="height: 100%">
 {{code}}</textarea
           >
           <div class="btn-group" role="group" aria-label="Quick Actions">
