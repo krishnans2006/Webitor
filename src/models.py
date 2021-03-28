@@ -94,8 +94,8 @@ def d_change_pwd(username, old, new):
 
 def d_get_sites(username, email):
     if username:
-        return list(db.collection("Sites").where("Creator", "==", "Users/" + username).stream())
-    return list(db.collection("Sites").where("Creator", "==", "Google-Users/" + email).stream())
+        return list(db.collection("Sites").where("Creator", "==", db.collection("Users").document(username)).stream())
+    return list(db.collection("Sites").where("Creator", "==", db.collection("Google-Users").document(email)).stream())
 
 def d_create(username, email, sitename, html_code):
     if db.collection("Sites").document(sitename).get().exists:
