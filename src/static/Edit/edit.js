@@ -61,6 +61,17 @@ const items = {
     Link: function () {
         return `<a class="btn btn-link">Link</a>`;
     },
+
+    Card: function () {
+        return `<div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>`;
+    },
     Image: function () {
         return "<img src='' alt='' />";
     },
@@ -89,6 +100,13 @@ Your browser does not support the video tag.
     },
 };
 
+
+// THE CULPRITS
+
+var domTree = document.getElementById("dom-tree");
+var page = document.getElementById("preview");
+var highlight = document.getElementById("highlight");
+
 function insertAtCursor(item, args = []) {
     myValue = items[item](args);
     myField = document.getElementById("code");
@@ -108,9 +126,7 @@ function insertAtCursor(item, args = []) {
     } else {
         myField.value += myValue;
     }
-    document.getElementById("preview").innerHTML = document.getElementById(
-        "code"
-    ).value;
+    document.getElementById("preview").innerHTML = myField.value;
     createDomTree();
 }
 
@@ -133,11 +149,6 @@ window.onload = function () {
     createDomTree();
 };
 
-// THE CULPRITS
-
-var domTree = document.getElementById("dom-tree");
-var page = document.getElementById("preview");
-var highlight = document.getElementById("highlight");
 
 // THE CREATION OF THE DOM TREE LOGIC
 
