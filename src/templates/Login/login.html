@@ -57,14 +57,14 @@
             <div class="inner-container">
 
                 <h1 class="content-title">Log Into my account</h1>
-                <button class="block-button google-sign-in-button" type="button" href="/google-signin">
+                <button class="block-button google-sign-in-button" onclick="window.location.href = '/google-signin'">
     <img src="https://d3e54v103j8qbb.cloudfront.net/img/dashboard/google-icon.9285495463.svg" width="15" height="15"/>
     <span>Sign in with Google</span>
-    </button>
+                </button>
                 <p class="separation-text">or</p>
                 <form method="POST">
-                    <input placeholder="Email or Username" type="text" class="block-input" id="email" name="email">
-                    <input type="password" class="block-input" placeholder="Password" id="password" name="password">
+                    <input placeholder="Email or Username" type="text" class="block-input" id="email" name="email" required>
+                    <input type="password" class="block-input" placeholder="Password" id="password" name="password" required>
                     <button class="block-button submit" type="submit">
                         <span class="login-text">Log In</span>
                     </button>

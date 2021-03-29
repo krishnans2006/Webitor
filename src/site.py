@@ -4,21 +4,31 @@ from generator import generator
 from google.oauth2 import id_token
 from google.auth.transport import requests
 import os
-from  trial import *
 
 site = Blueprint("site", __name__)
-@site.route('/', methods=["GET", "POST"])
-def index():
-    return render_template('Index/index.html')
-
-@site.route('/about', methods=["GET", "POST"])
-def about():
-    return render_template('About/about.html')
 
 @site.before_app_request
 def force_https():
     if request.endpoint in current_app.view_functions and request.headers.get('X-Forwarded-Proto', None) == 'http':
         return redirect(request.url.replace('http://', 'https://'))
+
+@site.route('/', methods=["GET", "POST"])
+def index():
+    return render_template('Index/index.html')
+
+@site.route("/s/<sitename>")
+def official_site(sitename):
+    print("Accessing published site", sitename)
+    site_code = d_site(sitename)
+    if not site_code:
+        flash("This site either doesn't exist, or is not published yet. Please make sure the site name is correct!", category="error")
+        return redirect(url_for("site.index"))
+    return site_code
+
+@site.route('/about', methods=["GET", "POST"])
+def about():
+    return render_template('About/about.html')
+
 
 @site.route('/google-signin', methods=["GET", "POST"])
 def google_signin():
@@ -192,29 +202,23 @@ def edit(sitename=None):
     site = d_get_site(session.get("username"), session.get("email"), sitename)
     return render_template('Edit/edit.html', name=site[0], code=site[1]["HTML"])
 
-
-@site.route('/builder',methods=['POST','GET'])
-def builder():
-    q = 0
+@site.route('/publish/<sitename>', methods=["GET", "POST"])
+def publish(sitename=None):
+    if not session.get('logged_in'):
+        flash("You must be logged in to edit your projects!", category='error')
+        return redirect(url_for('site.login'))
+    if not sitename:
+        flash("An Internal Error Occured! This has been reported and will be resolved soon. Thanks for the patience!", category="error")
     if request.method == "POST":
-        try:
-            type=request.form['tag']
-            X=request.form['X']
-            y=request.form['y']
-            t= request.form['text']
-            color=request.form['color']
-            if color:
-                print(color)
-                change_color(color)
-            elif type != 'stop' and type != 'read':
-                make_sth(type=type,x=X,y=y,q=q,text=t)
-                q+=1
-            elif type=='read':
-                read_file('a')
+        publish_check = request.form.get("publish")
+        if publish_check == 'on':
+            if d_publish(session.get("username"), session.get("email"), sitename):
+                flash("Successfully published!", category="success")
+                return redirect(url_for("site.edit", sitename=sitename))
             else:
-                close_time()
-                read_file('a')
-        except:
-            read_file('a')
-    return render_template('builder.html')
-
+                flash("Site could not be published!", category="error")
+                return redirect(url_for("site.edit", sitename=sitename))
+        flash("Site was not published.", category="success")
+        return redirect(url_for("site.edit", sitename=sitename))
+    return render_template("Publish/publish.html")
+    

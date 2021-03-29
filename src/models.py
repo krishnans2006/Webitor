@@ -119,33 +119,56 @@ def d_create(username, email, sitename, html_code):
     return True
 
 def d_edit(username, email, sitename, html_code):
-    owner_id = username if username else email
     if not db.collection("Sites").document(sitename).get().exists:
         return False
-    if not get("Sites", sitename, "Creator").path.split("/")[1] == owner_id:
-        return False
+    if username:
+        if not get("Sites", sitename, "Creator") == db.collection("Users").document(username):
+            return False
+    else:
+        if not get("Sites", sitename, "Creator") == db.collection("Google-Users").document(email):
+            return False
     db.collection("Sites").document(sitename).update(
         {
             "HTML": html_code
         }
     )
+    return True
 
 
 def d_get_site(username, email, sitename):
-    owner_id = username if username else email
     if not db.collection("Sites").document(sitename).get().exists:
         return False
-    if not get("Sites", sitename, "Creator").path.split("/")[1] == owner_id:
-        return False
+    if username:
+        if not get("Sites", sitename, "Creator") == db.collection("Users").document(username):
+            return False
+    else:
+        if not get("Sites", sitename, "Creator") == db.collection("Google-Users").document(email):
+            return False
     return [sitename, db.collection("Sites").document(sitename).get().to_dict()]
 
-def d_publish(username, sitename):
+
+def d_site(sitename):
     if not db.collection("Sites").document(sitename).get().exists:
         return False
-    if not get("Sites", sitename, "Creator").path.split("/")[1] == username:
+    if not get("Sites", sitename, "Published"):
         return False
+    return get("Sites", sitename, "HTML")
+
+def d_publish(username, email, sitename):
+    if not db.collection("Sites").document(sitename).get().exists:
+        return False
+    if username:
+        if not get("Sites", sitename, "Creator") == db.collection("Users").document(username):
+            return False
+    else:
+        if not get("Sites", sitename, "Creator") == db.collection("Google-Users").document(email):
+            return False
     db.collection("Sites").document(sitename).update(
         {
             "Published": True
         }
     )
+    return True
+
+def d_get_published_sites():
+    return list(db.collection("Sites").where("Published", "==", True).stream())
