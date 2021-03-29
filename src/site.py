@@ -4,7 +4,6 @@ from generator import generator
 from google.oauth2 import id_token
 from google.auth.transport import requests
 import os
-from  trial import *
 
 site = Blueprint("site", __name__)
 @site.route('/', methods=["GET", "POST"])
