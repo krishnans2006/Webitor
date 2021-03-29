@@ -16,7 +16,7 @@ def force_https():
 def index():
     return render_template('Index/index.html')
 
-@site.route("/site/<sitename>")
+@site.route("/s/<sitename>")
 def official_site(sitename):
     print("Accessing published site", sitename)
     site_code = d_site(sitename)
