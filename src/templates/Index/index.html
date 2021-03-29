@@ -35,7 +35,10 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/">Webitor</a>
+        <a class="navbar-brand" href="/">
+            <img src="{{url_for('static', filename='logo.png')}}" alt="" width="36" height="30">
+            Webitor
+        </a>
         <button
           class="navbar-toggler"
           type="button"
@@ -160,7 +163,7 @@
 
       {% endif %} {% endfor %}
 
-      <!-- Content -->
+      <center><img src="{{url_for('static', filename='full.png')}}" /></center>
     </div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
