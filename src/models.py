@@ -150,6 +150,8 @@ def d_get_site(username, email, sitename):
 def d_site(sitename):
     if not db.collection("Sites").document(sitename).get().exists:
         return False
+    if not get("Sites", sitename, "Published"):
+        return False
     return get("Sites", sitename, "HTML")
 
 def d_publish(username, email, sitename):
