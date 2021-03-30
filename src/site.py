@@ -34,7 +34,6 @@ def about():
 def google_signin():
     if session.get("logged_in"):
         return redirect(url_for('site.index'))
-    
     return render_template('Google-Sign-In/google.html')
 
 @site.route("/google-auth", methods=["GET", "POST"])
@@ -42,7 +41,6 @@ def google_auth():
     if request.method == "GET":
         return redirect(url_for("site.login"))
     token = request.form.get("idtoken")
-    print(token)
     try:
         idinfo = id_token.verify_oauth2_token(token, requests.Request(
         ), "337745045052-c19u56smhk30nck0dat09vigoe7fcolf.apps.googleusercontent.com")

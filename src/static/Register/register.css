@@ -85,8 +85,8 @@
     color: black;
 }
 .name-input{
-width: 49.6%;
-display: inline-block;
+    width: 49.6%;
+    display: inline-block !important;
 }
 .google-sign-in-button {
     font-family: 'Roboto', sans-serif;
@@ -254,7 +254,7 @@ display: inline-block;
     -webkit-box-pack: center;
 }
 .submit:hover {
-background-color: rgba(58,75,230,255);
+    background-color: rgba(58,75,230,255);
 }
 .smalltext-container {
     box-sizing: border-box;
@@ -275,8 +275,8 @@ background-color: rgba(58,75,230,255);
     -webkit-font-smoothing: antialiased;
 }
 input:focus{
-background-color: white;
-pointer-events: none;
-box-shadow: rgb(221, 221, 221) 0px 0px 0px 1px;
-outline: none;
+    background-color: white;
+    pointer-events: none;
+    box-shadow: rgb(221, 221, 221) 0px 0px 0px 1px;
+    outline: none;
 }

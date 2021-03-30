@@ -19,6 +19,7 @@
 
     <!-- Flash Messges -->
     <link
+      rel="stylesheet"
       type="text/css"
       href="{{url_for('static', filename='Alerts/alerts.css')}}"
     />
@@ -27,7 +28,7 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="{{ url_for('static',filename='Index/index.css') }}"
+      href="{{ url_for('static', filename='Index/index.css') }}"
     />
     <title>Webitor</title>
   </head>
@@ -155,7 +156,7 @@
             >
               <span aria-hidden="true" style="color: #fff">&times;</span>
             </button>
-            <h4 class="alert-heading-gradient">Uh, oh!</h4>
+            <h4 class="alert-heading-gradient">Success!</h4>
             <p class="lead mb-0">{{message}}</p>
           </div>
         </div>
