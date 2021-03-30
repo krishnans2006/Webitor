@@ -93,28 +93,28 @@ def register():
         return redirect(url_for("site.index"))
     if request.method == "POST":
         email = request.form.get("email")
-        username = request.form.get("username")
+        fname = request.form.get("first-name")
+        lname = request.form.get("last-name")
         password = request.form.get("password")
         if len(email) < 4:
             flash('Your email must be greater than 3 characters!', category='error')
-        elif len(username) <= 5:
-            flash('Your username must be greater than 5 characters!',
-                  category='error')
         elif len(password) < 8:
             flash('Your password should be 8 characters or more!', category='error')
         else:
-            if d_signup(username, email, password=password):
-                session["logged_in"] = True
-                session["username"] = username
-                session["email"] = email
-                flash(
-                    f"Successfully Registered as {username}!", category='success')
-                flash(
-                    f"You are now logged in as  {username}!", category='success')
-                return redirect(url_for("site.index"))
-            else:
-                flash(
-                    "Someone is already registered with this username or password!", category='error')
+            username = fname + lname
+            f_username = username
+            num = None
+            while not d_signup(f_username, email, password):
+                if not num:
+                    num = 0
+                num += 1
+                f_username = username + num
+            session["logged_in"] = True
+            session["username"] = f_username
+            session["email"] = email
+            flash(
+                f"Successfully Registered as {f_username}!", category='success')
+            return redirect(url_for("site.index"))
     return render_template('Register/register.html')
 
 
