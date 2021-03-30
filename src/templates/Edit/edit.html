@@ -1,5 +1,3 @@
-{% block title %}AlgoExperts{% endblock title %} {%block content %}
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,6 +21,67 @@
 
 <body>
     <div class="container-lg">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">
+                    <img src="{{url_for('static', filename='logo.png')}}" alt="" width="36" height="30">
+                    Webitor
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+                        {% if session.get("logged_in") %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/create">Create Site</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/projects">My Sites</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link disabled" tabindex="-1" aria-disabled="true" style="cursor: not-allowed">Create
+                                Site</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" tabindex="-1" aria-disabled="true" style="cursor: not-allowed">My
+                                Sites</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                    <ul class="navbar-nav mb-2 mb-lg-0">
+                        {% if session.get("logged_in") %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                My Account
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li>
+                                    <a class="dropdown-item" href="/change-password">Change Password</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/delete-account">Delete Account</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-primary navbar-btn" href="/logout">Log Out</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Log In</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-primary navbar-btn" href="/register">Register</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
         <!-- Displays User Alerts -->
         {% for category, message in get_flashed_messages(with_categories=true) %} {% if category == "error" %}
         <div classs="container p-5 full-alert">
@@ -114,4 +173,3 @@
 </body>
 
 </html>
-{% endblock content %}
