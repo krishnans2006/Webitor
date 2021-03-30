@@ -4,11 +4,13 @@
     float: left;
     margin-left: 30px;
 }
+
 .header-title {
     font-family: 'Nunito Sans', sans-serif;
     font-size: 25px;
     font-weight: 700;
 }
+
 .container {
     position: absolute;
     top: 50%;
@@ -16,16 +18,19 @@
     width: 500px;
     transform: translate(-50%, -40%);
 }
+
 .inner-container {
     height: 100%;
     position: relative;
 }
+
 .content-title {
     font-family: 'Nunito Sans', sans-serif;
     font-size: 38px;
     font-weight: 500;
     -webkit-font-smoothing: antialiased;
 }
+
 .block-button {
     display: block;
     width: 100%;
@@ -38,6 +43,7 @@
     text-align: center;
     transition: 0.3s;
 }
+
 .block-input {
     display: block;
     width: 100%;
@@ -80,14 +86,17 @@
     transition-timing-function: ease, ease;
     margin-bottom: 10px;
 }
+
 .block-input:hover {
     background-color: #ddd;
     color: black;
 }
-.name-input{
-    width: 49.6%;
+
+.name-input {
+    width: 49%;
     display: inline-block !important;
 }
+
 .google-sign-in-button {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
@@ -116,15 +125,18 @@
     transition-property: background-color, border-color, box-shadow;
     transition-timing-function: ease, ease, ease;
 }
+
 .google-sign-in-button img {
     display: inline-block;
     vertical-align: middle;
     padding: 2px;
     border-radius: 5px;
 }
+
 .google-sign-in-button:hover {
-	background-color: rgb(221, 221, 221);
+    background-color: rgb(221, 221, 221);
 }
+
 .separation-text {
     text-align: center;
     font-family: 'Nunito Sans', sans-serif;
@@ -134,19 +146,24 @@
     color: rgb(102, 102, 102);
     line-height: 16px
 }
+
 .bottom-links {
     width: 100%;
 }
+
 .bottom-links div {
     width: 49%;
     display: inline-block;
 }
+
 .smalltext-left {
     text-align: left;
 }
+
 .smalltext-right {
     text-align: right;
 }
+
 .smalltext {
     background-color: rgba(0, 0, 0, 0);
     border-bottom-color: rgb(102, 102, 102);
@@ -172,12 +189,14 @@
     -webkit-box-direction: normal;
     -webkit-font-smoothing: antialiased;
 }
+
 .smalltext:hover {
     color: black;
     text-decoration-color: black;
     border-bottom-color: black;
     text-decoration-line: none;
 }
+
 .login-text {
     box-sizing: border-box;
     color: rbg(255, 255, 255);
@@ -201,6 +220,7 @@
     -webkit-box-direction: normal;
     -webkit-font-smoothing: antialiased;
 }
+
 .submit {
     align-items: center;
     appearance: none;
@@ -253,9 +273,11 @@
     -webkit-box-align: center;
     -webkit-box-pack: center;
 }
+
 .submit:hover {
-    background-color: rgba(58,75,230,255);
+    background-color: rgba(58, 75, 230, 255);
 }
+
 .smalltext-container {
     box-sizing: border-box;
     color: rgb(115, 115, 115);
@@ -274,7 +296,8 @@
     -webkit-box-direction: normal;
     -webkit-font-smoothing: antialiased;
 }
-input:focus{
+
+input:focus {
     background-color: white;
     pointer-events: none;
     box-shadow: rgb(221, 221, 221) 0px 0px 0px 1px;
