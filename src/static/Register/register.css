@@ -176,6 +176,7 @@ display: inline-block;
     color: black;
     text-decoration-color: black;
     border-bottom-color: black;
+    text-decoration-line: none;
 }
 .login-text {
     box-sizing: border-box;

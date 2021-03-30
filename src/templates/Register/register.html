@@ -8,10 +8,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
-
     <!-- Flash Messages -->
     <link type="text/css" href="{{url_for('static', filename='Alerts/alerts.css')}}" />
 
@@ -44,7 +40,7 @@
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true" style="color: #fff">&times;</span>
                 </button>
-                <h4 class="alert-heading-gradient">Uh, oh!</h4>
+                <h4 class="alert-heading-gradient">Success!</h4>
                 <p class="lead mb-0">{{message}}</p>
             </div>
         </div>
@@ -88,10 +84,6 @@
         </div>
     </div>
 
-</body>
-
-</html>
-
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>
@@ -101,7 +93,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
-<script src="https://apis.google.com/js/platform.js" async defer></script>
 <script src="{{url_for('static', filename='Index/index.js')}}"></script>
 <script src="{{ url_for('static',filename='Register/register.js') }}"></script>
 </body>
