@@ -143,7 +143,6 @@ def change_password():
 def delete_account():
     if request.method == "POST":
         password = request.form.get('password')
-        confirm_password = request.form.get('confirm-password')
 
         if d_delete(session.get("username"), session.get("email"), password):
             session.clear()
