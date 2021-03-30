@@ -1,160 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
-    <!-- Flash Messages -->
-    <link type="text/css" href="{{url_for('static', filename='Alerts/alerts.css')}}" />
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+
+    <!-- Flash Messges -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='Alerts/alerts.css')}}"
+    />
 
     <!-- Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='Register/register.css') }}" />
-
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='Register/register.css') }}"
+    />
     <title>Register</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">
-                <img src="{{url_for('static', filename='logo.png')}}" alt="" width="36" height="30">
-                Webitor
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-                    {% if session.get("logged_in") %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="/create">Create Site</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/projects">My Sites</a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link disabled" tabindex="-1" aria-disabled="true" style="cursor: not-allowed">Create
-                            Site</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" tabindex="-1" aria-disabled="true" style="cursor: not-allowed">My
-                            Sites</a>
-                    </li>
-                    {% endif %}
-                </ul>
-                <ul class="navbar-nav mb-2 mb-lg-0">
-                    {% if session.get("logged_in") %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            My Account
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li>
-                                <a class="dropdown-item" href="/change-password">Change Password</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="/delete-account">Delete Account</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-primary navbar-btn" href="/logout">Log Out</a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login">Log In</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-primary navbar-btn" href="/register">Register</a>
-                    </li>
-                    {% endif %}
-                </ul>
-            </div>
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+          <img
+            src="{{url_for('static', filename='logo.png')}}"
+            alt=""
+            width="36"
+            height="30"
+          />
+          Webitor
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+            {% if session.get("logged_in") %}
+            <li class="nav-item">
+              <a class="nav-link" href="/create">Create Site</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/projects">My Sites</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a
+                class="nav-link disabled"
+                tabindex="-1"
+                aria-disabled="true"
+                style="cursor: not-allowed"
+                >Create Site</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link disabled"
+                tabindex="-1"
+                aria-disabled="true"
+                style="cursor: not-allowed"
+                >My Sites</a
+              >
+            </li>
+            {% endif %}
+          </ul>
+          <ul class="navbar-nav mb-2 mb-lg-0">
+            {% if session.get("logged_in") %}
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                My Account
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                  <a class="dropdown-item" href="/change-password"
+                    >Change Password</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/delete-account"
+                    >Delete Account</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-primary navbar-btn" href="/logout">Log Out</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Log In</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-primary navbar-btn" href="/register"
+                >Register</a
+              >
+            </li>
+            {% endif %}
+          </ul>
         </div>
+      </div>
     </nav>
     <!-- Displays User Alerts -->
     {% for category, message in get_flashed_messages(with_categories=true) %} {%
     if category == "error" %}
     <div classs="container p-5 full-alert">
-        <div class="row no-gutters fixed-bottom">
-            <div class="alert alert-gradient shadow" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true" style="color: #fff">&times;</span>
-                </button>
-                <h4 class="alert-heading-gradient">Uh, oh!</h4>
-                <p class="lead mb-0">{{message}}</p>
-            </div>
+      <div class="row no-gutters">
+        <div class="alert alert-gradient shadow" role="alert">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true" style="color: #fff">&times;</span>
+          </button>
+          <h4 class="alert-heading-gradient">Uh, oh!</h4>
+          <p class="lead mb-0">{{message}}</p>
         </div>
+      </div>
     </div>
 
     {% elif category == "success" %}
     <div classs="container p-5 full-alert">
-        <div class="row no-gutters fixed-bottom">
-            <div class="alert alert-gradient shadow" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true" style="color: #fff">&times;</span>
-                </button>
-                <h4 class="alert-heading-gradient">Success!</h4>
-                <p class="lead mb-0">{{message}}</p>
-            </div>
+      <div class="row no-gutters">
+        <div class="alert alert-gradient shadow" role="alert">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true" style="color: #fff">&times;</span>
+          </button>
+          <h4 class="alert-heading-gradient">Success!</h4>
+          <p class="lead mb-0">{{message}}</p>
         </div>
+      </div>
     </div>
 
     {% endif %} {% endfor %}
     <div class="container">
-        <div class="inner-container">
-            <h1 class="content-title">Build your dreams - for free</h1>
-            <button class="block-button google-sign-in-button" onclick="window.location.href = '/google-signin'">
-                <img src="https://d3e54v103j8qbb.cloudfront.net/img/dashboard/google-icon.9285495463.svg" width="15"
-                    height="15" />
-                <span>Sign in with Google</span>
-            </button>
-            <p class="separation-text">or</p>
-            <form method="POST">
-                <input placeholder="First Name" type="text" class="block-input name-input" id="first-name"
-                    name="first-name">
-                <input placeholder="Last Name" type="text" class="block-input name-input" id="last-name"
-                    name="last-name">
-                <input placeholder="Email" type="text" class="block-input" id="email" name="email">
-                <input type="password" class="block-input" placeholder="Password" id="password" name="password">
-                <button class="block-button submit" type="submit">
-                    <span class="login-text">Sign Up</span>
-                </button>
-            </form>
-            <div class="bottom-links">
-                <div class="smalltext-left">
-                    <p class="smalltext-container">
-                        Already have an account? <a class="smalltext" href="/login">Sign in</a>
-                    </p>
-                </div>
-                <div class="smalltext-right">
-                    <p class="smalltext-container">
-                    </p>
-                </div>
-            </div>
+      <div class="inner-container">
+        <h1 class="content-title">Build your dreams - for free</h1>
+        <button
+          class="block-button google-sign-in-button"
+          onclick="window.location.href = '/google-signin'"
+        >
+          <img
+            src="https://d3e54v103j8qbb.cloudfront.net/img/dashboard/google-icon.9285495463.svg"
+            width="15"
+            height="15"
+          />
+          <span>Sign in with Google</span>
+        </button>
+        <p class="separation-text">or</p>
+        <form method="POST">
+          <input
+            placeholder="First Name"
+            type="text"
+            class="block-input"
+            id="first-name"
+            name="first-name"
+          />
+          <input
+            placeholder="Last Name"
+            type="text"
+            class="block-input"
+            id="last-name"
+            name="last-name"
+          />
+          <input
+            placeholder="Email"
+            type="text"
+            class="block-input"
+            id="email"
+            name="email"
+          />
+          <input
+            type="password"
+            class="block-input"
+            placeholder="Password"
+            id="password"
+            name="password"
+          />
+          <button class="block-button submit" type="submit">
+            <span class="login-text">Sign Up</span>
+          </button>
+        </form>
+        <div class="bottom-links">
+          <div class="smalltext-left">
+            <p class="smalltext-container">
+              Already have an account?
+              <a class="smalltext" href="/login">Sign in</a>
+            </p>
+          </div>
+          <div class="smalltext-right">
+            <p class="smalltext-container"></p>
+          </div>
         </div>
+      </div>
     </div>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
-<script src="{{url_for('static', filename='Index/index.js')}}"></script>
-<script src="{{ url_for('static',filename='Register/register.js') }}"></script>
-</body>
-
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script src="{{url_for('static', filename='Index/index.js')}}"></script>
+    <script src="{{ url_for('static',filename='Register/register.js') }}"></script>
+  </body>
 </html>
