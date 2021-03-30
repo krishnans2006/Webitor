@@ -128,7 +128,7 @@
       {% for category, message in get_flashed_messages(with_categories=true) %}
       {% if category == "error" %}
       <div classs="container p-5 full-alert">
-        <div class="row no-gutters fixed-bottom">
+        <div class="row no-gutters">
           <div class="alert alert-gradient shadow" role="alert">
             <button
               type="button"
@@ -146,7 +146,7 @@
 
       {% elif category == "success" %}
       <div classs="container p-5 full-alert">
-        <div class="row no-gutters fixed-bottom">
+        <div class="row no-gutters">
           <div class="alert alert-gradient shadow" role="alert">
             <button
               type="button"
