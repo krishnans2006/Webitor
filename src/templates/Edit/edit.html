@@ -1,175 +1,292 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
 
     <!-- Flash Messages -->
-    <link type="text/css" href="{{url_for('static', filename='Alerts/alerts.css')}}" />
+    <link
+      type="text/css"
+      href="{{url_for('static', filename='Alerts/alerts.css')}}"
+    />
 
     <!-- Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='Edit/edit.css') }}" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static',filename='Edit/edit.css') }}"
+    />
 
     <title>Edit</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="container-lg">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="/">
-                    <img src="{{url_for('static', filename='logo.png')}}" alt="" width="36" height="30">
-                    Webitor
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">
+            <img
+              src="{{url_for('static', filename='logo.png')}}"
+              alt=""
+              width="36"
+              height="30"
+            />
+            Webitor
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+              {% if session.get("logged_in") %}
+              <li class="nav-item">
+                <a class="nav-link" href="/create">Create Site</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/projects">My Sites</a>
+              </li>
+              {% else %}
+              <li class="nav-item">
+                <a
+                  class="nav-link disabled"
+                  tabindex="-1"
+                  aria-disabled="true"
+                  style="cursor: not-allowed"
+                  >Create Site</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link disabled"
+                  tabindex="-1"
+                  aria-disabled="true"
+                  style="cursor: not-allowed"
+                  >My Sites</a
+                >
+              </li>
+              {% endif %}
+            </ul>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+              {% if session.get("logged_in") %}
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  id="navbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  My Account
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-                        {% if session.get("logged_in") %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="/create">Create Site</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/projects">My Sites</a>
-                        </li>
-                        {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link disabled" tabindex="-1" aria-disabled="true" style="cursor: not-allowed">Create
-                                Site</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" tabindex="-1" aria-disabled="true" style="cursor: not-allowed">My
-                                Sites</a>
-                        </li>
-                        {% endif %}
-                    </ul>
-                    <ul class="navbar-nav mb-2 mb-lg-0">
-                        {% if session.get("logged_in") %}
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                My Account
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li>
-                                    <a class="dropdown-item" href="/change-password">Change Password</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="/delete-account">Delete Account</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-primary navbar-btn" href="/logout">Log Out</a>
-                        </li>
-                        {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="/login">Log In</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-primary navbar-btn" href="/register">Register</a>
-                        </li>
-                        {% endif %}
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <!-- Displays User Alerts -->
-        {% for category, message in get_flashed_messages(with_categories=true) %} {% if category == "error" %}
-        <div classs="container p-5 full-alert">
-            <div class="row no-gutters fixed-bottom">
-                <div class="alert alert-gradient shadow" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true" style="color:#fff">&times;</span>
-                    </button>
-                    <h4 class="alert-heading-gradient">Uh, oh!</h4>
-                    <p class="lead mb-0">{{message}}</p>
-                </div>
-            </div>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li>
+                    <a class="dropdown-item" href="/change-password"
+                      >Change Password</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/delete-account"
+                      >Delete Account</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="btn btn-primary navbar-btn" href="/logout">Log Out</a>
+              </li>
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="/login">Log In</a>
+              </li>
+              <li class="nav-item">
+                <a class="btn btn-primary navbar-btn" href="/register"
+                  >Register</a
+                >
+              </li>
+              {% endif %}
+            </ul>
+          </div>
         </div>
-
-        {% elif category == "success" %}
-        <div classs="container p-5 full-alert">
-            <div class="row no-gutters fixed-bottom">
-                <div class="alert alert-gradient shadow" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true" style="color:#fff">&times;</span>
-                    </button>
-                    <h4 class="alert-heading-gradient">Uh, oh!</h4>
-                    <p class="lead mb-0">{{message}}</p>
-                </div>
-            </div>
+      </nav>
+      {% for category, message in get_flashed_messages(with_categories=true) %}
+      {% if category == "error" %}
+      <div classs="container p-5 full-alert">
+        <div class="row no-gutters fixed-bottom">
+          <div class="alert alert-gradient shadow" role="alert">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+            >
+              <span aria-hidden="true" style="color: #fff">&times;</span>
+            </button>
+            <h4 class="alert-heading-gradient">Uh, oh!</h4>
+            <p class="lead mb-0">{{message}}</p>
+          </div>
         </div>
+      </div>
 
-        {% endif %} {% endfor %}
-
-        <!-- Content -->
-        <h2 id="sitename">{{name}}</h2>
-        <div style="display: flex; min-height: 100%">
-            <div id="code-div" style="width: 45%; height: 75%; min-height: 400px">
-                <textarea id="code" class="form-control" onkeyup="code_send();" rows="23" cols="100"
-                    style="height: 100%">
-{{code}}</textarea>
-                <div class="btn-group" role="group" aria-label="Quick Actions">
-                    <button type="button" class="btn btn-primary" onclick="insertAtCursor('Navbar');">
-                        Navbar
-                    </button><button type="button" class="btn btn-primary" onclick="insertAtCursor('Link');">
-                        Link
-                    </button>
-                    <button type="button" class="btn btn-primary" onclick="insertAtCursor('Form');">
-                        Form
-                    </button>
-                    <button type="button" class="btn btn-primary" onclick="insertAtCursor('Button');">
-                        Button
-                    </button>
-                    <button type="button" class="btn btn-primary" onclick="insertAtCursor('Link');">
-                        Link
-                    </button>
-                    <button type="button" class="btn btn-primary" onclick="insertAtCursor('Card');">
-                        Card
-                    </button>
-                    <button type="button" class="btn btn-primary" onclick="insertAtCursor('Image');">
-                        Image
-                    </button>
-                    <button type="button" class="btn btn-primary" onclick="insertAtCursor('Video');">
-                        Video
-                    </button>
-                    <button type="button" class="btn btn-primary" onclick="insertAtCursor('Line-Break');">
-                        Line Break
-                    </button>
-                    <button type="button" class="btn btn-primary" onclick="insertAtCursor('Testimonial');">
-                        Testimonial
-                    </button>
-                    <button type="button" class="btn btn-primary" onclick="insertAtCursor('Inner-Section');">
-                        Inner Section
-                    </button>
-                    <button type="button" class="btn btn-primary" onclick="insertAtCursor('Text-Editor');">
-                        Text Editor
-                    </button>
-                </div>
-            </div>
-            <div style="width: 10%">
-                <pre id="dom-tree"></pre>
-            </div>
-            <div style="width: 45%">
-                <div id="preview"></div>
-            </div>
+      {% elif category == "success" %}
+      <div classs="container p-5 full-alert">
+        <div class="row no-gutters fixed-bottom">
+          <div class="alert alert-gradient shadow" role="alert">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+            >
+              <span aria-hidden="true" style="color: #fff">&times;</span>
+            </button>
+            <h4 class="alert-heading-gradient">Uh, oh!</h4>
+            <p class="lead mb-0">{{message}}</p>
+          </div>
         </div>
-        <div id="highlight"></div>
+      </div>
+
+      {% endif %} {% endfor %}
+
+      <!-- Content -->
+      <h2 id="sitename">{{name}}</h2>
+      <div style="display: flex; min-height: 100%">
+        <div id="code-div" style="width: 45%; height: 75%; min-height: 400px">
+          <textarea
+            id="code"
+            class="form-control"
+            onkeyup="code_send();"
+            rows="23"
+            cols="100"
+            style="height: 100%"
+          >
+{{code}}</textarea
+          >
+          <div class="btn-group" role="group" aria-label="Quick Actions">
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="insertAtCursor('Navbar');"
+            >
+              Navbar</button
+            ><button
+              type="button"
+              class="btn btn-primary"
+              onclick="insertAtCursor('Link');"
+            >
+              Link
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="insertAtCursor('Form');"
+            >
+              Form
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="insertAtCursor('Button');"
+            >
+              Button
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="insertAtCursor('Link');"
+            >
+              Link
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="insertAtCursor('Card');"
+            >
+              Card
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="insertAtCursor('Image');"
+            >
+              Image
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="insertAtCursor('Video');"
+            >
+              Video
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="insertAtCursor('Line-Break');"
+            >
+              Line Break
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="insertAtCursor('Testimonial');"
+            >
+              Testimonial
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="insertAtCursor('Inner-Section');"
+            >
+              Inner Section
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="insertAtCursor('Text-Editor');"
+            >
+              Text Editor
+            </button>
+          </div>
+        </div>
+        <div style="width: 10%">
+          <pre id="dom-tree"></pre>
+        </div>
+        <div style="width: 45%">
+          <div id="preview"></div>
+        </div>
+      </div>
+      <div id="highlight"></div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
-        crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+      crossorigin="anonymous"
+    ></script>
     <script src="{{ url_for('static',filename='Edit/edit.js') }}"></script>
-</body>
-
+  </body>
 </html>
