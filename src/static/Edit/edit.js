@@ -100,46 +100,17 @@ Your browser does not support the video tag.
     },
 };
 
-
 // THE CULPRITS
 
 var domTree = document.getElementById("dom-tree");
 var page = document.getElementById("preview");
 var highlight = document.getElementById("highlight");
 
-function insertAtCursor(item, args = []) {
-    myValue = items[item](args);
-    myField = document.getElementById("code");
-    if (document.selection) {
-        myField.focus();
-        sel = document.selection.createRange();
-        sel.text = myValue;
-    } else if (myField.selectionStart || myField.selectionStart == "0") {
-        var startPos = myField.selectionStart;
-        var endPos = myField.selectionEnd;
-        myField.value =
-            myField.value.substring(0, startPos) +
-            myValue +
-            myField.value.substring(endPos, myField.value.length);
-        myField.selectionStart = startPos + myValue.length;
-        myField.selectionEnd = startPos + myValue.length;
-    } else {
-        myField.value += myValue;
-    }
-    document.getElementById("preview").innerHTML = myField.value;
+function insertAtCursor(item) {
+    myValue = items[item]();
+    editor.insert(myValue);
+    document.getElementById("preview").innerHTML = editor.getValue();
     createDomTree();
-}
-
-function code_send() {
-    document.getElementById("preview").innerHTML = document.getElementById(
-        "code"
-    ).value;
-    createDomTree();
-    console.log("Sending!");
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/edit/" + document.getElementById("sitename").innerHTML);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.send("code=" + document.getElementById("code").value);
 }
 
 window.onload = function () {
@@ -147,6 +118,24 @@ window.onload = function () {
         "code"
     ).value;
     createDomTree();
+    editor = ace.edit(document.getElementById("code"), {
+        theme: "ace/theme/tomorrow",
+        mode: "ace/mode/html",
+        wrap: true,
+        autoScrollEditorIntoView: true,
+        maxLines: 45,
+        minLines: 30
+    })
+    editor.session.on('change', function(delta) {
+        console.log("....")
+        newVal = editor.getValue();
+        document.getElementById("preview").innerHTML = newVal;
+        createDomTree()
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/edit/" + document.getElementById("sitename").innerHTML);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send("code=" + newVal);
+    })
 };
 
 
