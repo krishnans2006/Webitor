@@ -252,6 +252,63 @@
     -webkit-font-smoothing: antialiased;
 }
 
+.custom-btn {
+    align-items: center;
+    appearance: none;
+    background-color: rgb(66, 83, 255);
+    border-bottom-color: rgb(255, 255, 255);
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom-style: none;
+    border-bottom-width: 0px;
+    border-left-color: rgb(255, 255, 255);
+    border-left-style: none;
+    border-left-width: 0px;
+    border-right-color: rgb(255, 255, 255);
+    border-right-style: none;
+    border-right-width: 0px;
+    border-top-color: rgb(255, 255, 255);
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-top-style: none;
+    border-top-width: 0px;
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    display: flex;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 16px;
+    font-stretch: 100%;
+    font-weight: 600;
+    text-align: center;
+    padding-bottom: 0px;
+    padding-left: 32px;
+    padding-right: 32px;
+    padding-top: 0px;
+    text-indent: 0px;
+    transition-delay: 0s;
+    transition-duration: 0.1s;
+    transition-property: background-color;
+    transition-timing-function: ease;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    overflow-x: visible;
+    overflow-y: visible;
+    line-height: 20px;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+}
+
+.custom-btn:hover {
+    background-color: rgba(58, 75, 230, 255);
+}
+
 .submit {
     align-items: center;
     appearance: none;
