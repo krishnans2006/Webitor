@@ -1,78 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1,
-            shrink-to-fit=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+            shrink-to-fit=no" />
 
     <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous"
-    />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
 
     <!-- Flash Messges -->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{url_for('static', filename='Alerts/alerts.css')}}"
-    />
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='Alerts/alerts.css')}}" />
 
     <!-- Custom CSS-->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{ url_for('static', filename='Index/index.css') }}"
-    />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='Index/index.css') }}" />
     <title>Webitor</title>
-  </head>
+</head>
 
-  <body>
+<body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="/">
-          <img
-            src="{{url_for('static', filename='logo.png')}}"
-            alt=""
-            width="36"
-            height="30"
-          />
-          Webitor
-        </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <img src="{{url_for('static', filename='logo.png')}}" alt="" width="36" height="30" /> Webitor
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-            {% if session.get("logged_in") %}
-            <li class="nav-item">
-              <a class="nav-link" href="/create">Create Site</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/projects">My Sites</a>
-            </li>
-            {% else %}
-            <li class="nav-item">
-              <a
-                class="nav-link disabled"
-                tabindex="-1"
-                aria-disabled="true"
-                style="cursor: not-allowed"
-                >Create Site</a
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+                    {% if session.get("logged_in") %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/create">Create Site</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/projects">My Sites</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link disabled" tabindex="-1" aria-disabled="true" style="cursor: not-allowed">Create Site</a
               >
             </li>
             <li class="nav-item">
@@ -98,10 +64,9 @@
               >
                 My Account
               </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li>
-                  <a class="dropdown-item" href="/change-password"
-                    >Change Password</a
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item" href="/change-password">Change Password</a
                   >
                 </li>
                 <li>
@@ -113,14 +78,13 @@
             </li>
             <li class="nav-item">
               <a class="btn btn-primary navbar-btn" href="/logout">Log Out</a>
-            </li>
-            {% else %}
-            <li class="nav-item">
-              <a class="nav-link" href="/login">Log In</a>
-            </li>
-            <li class="nav-item">
-              <a class="btn btn-primary navbar-btn" href="/register"
-                >Register</a
+                            </li>
+                            {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/login">Log In</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-primary navbar-btn" href="/register">Register</a
               >
             </li>
             {% endif %}
@@ -134,7 +98,7 @@
       {% if category == "error" %}
       <div classs="container p-5 full-alert">
         <div class="row no-gutters">
-          <div class="alert alert-gradient shadow" role="alert">
+          <div class="alert alert-gradient-error shadow" role="alert">
             <button
               type="button"
               class="close"
@@ -152,7 +116,7 @@
       {% elif category == "success" %}
       <div classs="container p-5 full-alert">
         <div class="row no-gutters">
-          <div class="alert alert-gradient shadow" role="alert">
+          <div class="alert alert-gradient-success shadow" role="alert">
             <button
               type="button"
               class="close"

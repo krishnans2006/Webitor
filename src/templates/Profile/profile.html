@@ -98,7 +98,7 @@
       {% if category == "error" %}
       <div classs="container p-5 full-alert">
         <div class="row no-gutters fixed-bottom">
-          <div class="alert alert-gradient shadow" role="alert">
+          <div class="alert alert-gradient-error shadow" role="alert">
             <button
               type="button"
               class="close"
@@ -116,7 +116,7 @@
       {% elif category == "success" %}
       <div classs="container p-5 full-alert">
         <div class="row no-gutters fixed-bottom">
-          <div class="alert alert-gradient shadow" role="alert">
+          <div class="alert alert-gradient-success shadow" role="alert">
             <button
               type="button"
               class="close"
@@ -125,7 +125,7 @@
             >
               <span aria-hidden="true" style="color: #fff">&times;</span>
             </button>
-            <h4 class="alert-heading-gradient">Uh, oh!</h4>
+            <h4 class="alert-heading-gradient">Woohoo!</h4>
             <p class="lead mb-0">{{message}}</p>
           </div>
         </div>

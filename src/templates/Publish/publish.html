@@ -1,78 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
     <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous"
-    />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
 
     <!-- Flash Messages -->
-    <link
-      type="text/css"
-      href="{{url_for('static', filename='Alerts/alerts.css')}}"
-    />
+    <link type="text/css" href="{{url_for('static', filename='Alerts/alerts.css')}}" />
 
     <!-- Custom CSS-->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{ url_for('static',filename='Publish/publish.css') }}"
-    />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='Publish/publish.css') }}" />
 
     <title>About</title>
-  </head>
+</head>
 
-  <body>
+<body>
     <div class="container-lg">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="/">
-            <img
-              src="{{url_for('static', filename='logo.png')}}"
-              alt=""
-              width="36"
-              height="30"
-            />
-            Webitor
-          </a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">
+                    <img src="{{url_for('static', filename='logo.png')}}" alt="" width="36" height="30" /> Webitor
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-              {% if session.get("logged_in") %}
-              <li class="nav-item">
-                <a class="nav-link" href="/create">Create Site</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/projects">My Sites</a>
-              </li>
-              {% else %}
-              <li class="nav-item">
-                <a
-                  class="nav-link disabled"
-                  tabindex="-1"
-                  aria-disabled="true"
-                  style="cursor: not-allowed"
-                  >Create Site</a
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+                        {% if session.get("logged_in") %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/create">Create Site</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/projects">My Sites</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link disabled" tabindex="-1" aria-disabled="true" style="cursor: not-allowed">Create Site</a
                 >
               </li>
               <li class="nav-item">
@@ -98,10 +65,9 @@
                 >
                   My Account
                 </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li>
-                    <a class="dropdown-item" href="/change-password"
-                      >Change Password</a
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li>
+                                    <a class="dropdown-item" href="/change-password">Change Password</a
                     >
                   </li>
                   <li>
@@ -113,14 +79,13 @@
               </li>
               <li class="nav-item">
                 <a class="btn btn-primary navbar-btn" href="/logout">Log Out</a>
-              </li>
-              {% else %}
-              <li class="nav-item">
-                <a class="nav-link" href="/login">Log In</a>
-              </li>
-              <li class="nav-item">
-                <a class="btn btn-primary navbar-btn" href="/register"
-                  >Register</a
+                                </li>
+                                {% else %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/login">Log In</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="btn btn-primary navbar-btn" href="/register">Register</a
                 >
               </li>
               {% endif %}
@@ -133,7 +98,7 @@
       {% if category == "error" %}
       <div classs="container p-5 full-alert">
         <div class="row no-gutters fixed-bottom">
-          <div class="alert alert-gradient shadow" role="alert">
+          <div class="alert alert-gradient-error shadow" role="alert">
             <button
               type="button"
               class="close"
@@ -151,7 +116,7 @@
       {% elif category == "success" %}
       <div classs="container p-5 full-alert">
         <div class="row no-gutters fixed-bottom">
-          <div class="alert alert-gradient shadow" role="alert">
+          <div class="alert alert-gradient-success shadow" role="alert">
             <button
               type="button"
               class="close"
@@ -160,7 +125,7 @@
             >
               <span aria-hidden="true" style="color: #fff">&times;</span>
             </button>
-            <h4 class="alert-heading-gradient">Uh, oh!</h4>
+            <h4 class="alert-heading-gradient">Woohoo!</h4>
             <p class="lead mb-0">{{message}}</p>
           </div>
         </div>
@@ -183,34 +148,19 @@
                     <p class="smalltext-container">
                         Maybe you're lost,
                         <a class="smalltext" href="/edit/{{site}}" style="text-decoration: none;"> keep editing.</a>
-                    </p>
+                                    </p>
                 </div>
             </div>
-        </div>
+    </div>
     </div>
     </div>
 
-    <script
-      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
     <script src="{{url_for('static', filename='Index/index.js')}}"></script>
     <script src="{{ url_for('static',filename='Publish/publish.js') }}"></script>
-  </body>
+</body>
+
 </html>

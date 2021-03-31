@@ -1,5 +1,13 @@
-.alert-gradient {
-    background-image: linear-gradient(to top right, #e66465, #9198e5);
+.alert-gradient-success {
+    background-image: linear-gradient(to top right, #22c1c3, #fdbb2d);
+    border: none;
+    border-radius: 0px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.alert-gradient-error {
+    background-image: linear-gradient(to top right, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
     border: none;
     border-radius: 0px;
     border-bottom-left-radius: 5px;
