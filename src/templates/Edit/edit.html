@@ -119,8 +119,13 @@
             </div>
         </div>
         <div class="input-group mb-3">
+            {% if not published %}
             <button type="button" class="btn btn-primary" onclick="window.location.href = '/publish/{{name}}';">
                 Publish Site!</button>
+            {% else %}
+            <button type="button" class="btn btn-primary" onclick="window.location.href = '/unpublish/{{name}}';">
+                Unpublish Site!</button>
+            {% endif %}
             <span class="input-group-text" id="basic-addon1">Quick Insert:</span>
             <div class="btn-group" role="group" aria-label="Quick Actions">
                 <button type="button" class="btn btn-primary" onclick="insertAtCursor('Navbar');" aria-describedby="basic-addon1">
