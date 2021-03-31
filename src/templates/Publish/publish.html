@@ -169,10 +169,25 @@
       {% endif %} {% endfor %}
 
       <!-- Content -->
-      <form method="POST">
-        <input type="checkbox" id="publish" name="publish" />
-        <button type="submit">Publish Site!</button>
-      </form>
+    <div class="container">
+        <div class="inner-container">
+            <form method="POST">
+                <h1 class="content-title">Publish your site</h1>
+                <p class="separation-text">The site can be accessed publicly</p>
+                <button class="block-button submit">
+                    <span class="login-text">Publish Site</span>
+                </button>
+            </form>
+            <div class="bottom-links">
+                <div class="smalltext-left">
+                    <p class="smalltext-container">
+                        Maybe you're lost,
+                        <a class="smalltext" href="/edit/{{site}}" style="text-decoration: none;"> keep editing.</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
 
     <script

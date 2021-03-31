@@ -9,6 +9,13 @@
   flex: 30%;
   margin: 0;
   border: 1px solid black;
+  overflow: auto;
+  height: 100%;
+  max-height: 75vh;
+}
+
+#preview {
+    border: 1px solid black;
 }
 
 #page {

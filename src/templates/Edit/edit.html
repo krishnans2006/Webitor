@@ -126,41 +126,46 @@
                 <div id="preview"></div>
             </div>
         </div>
-        <div class="btn-group" role="group" aria-label="Quick Actions">
-            <button type="button" class="btn btn-primary" onclick="insertAtCursor('Navbar');">
-                Navbar</button><button type="button" class="btn btn-primary" onclick="insertAtCursor('Link');">
-                Link
-            </button>
-            <button type="button" class="btn btn-primary" onclick="insertAtCursor('Form');">
-                Form
-            </button>
-            <button type="button" class="btn btn-primary" onclick="insertAtCursor('Button');">
-                Button
-            </button>
-            <button type="button" class="btn btn-primary" onclick="insertAtCursor('Link');">
-                Link
-            </button>
-            <button type="button" class="btn btn-primary" onclick="insertAtCursor('Card');">
-                Card
-            </button>
-            <button type="button" class="btn btn-primary" onclick="insertAtCursor('Image');">
-                Image
-            </button>
-            <button type="button" class="btn btn-primary" onclick="insertAtCursor('Video');">
-                Video
-            </button>
-            <button type="button" class="btn btn-primary" onclick="insertAtCursor('Line-Break');">
-                Line Break
-            </button>
-            <button type="button" class="btn btn-primary" onclick="insertAtCursor('Testimonial');">
-                Testimonial
-            </button>
-            <button type="button" class="btn btn-primary" onclick="insertAtCursor('Inner-Section');">
-                Inner Section
-            </button>
-            <button type="button" class="btn btn-primary" onclick="insertAtCursor('Text-Editor');">
-                Text Editor
-            </button>
+        <div class="input-group mb-3">
+            <button type="button" class="btn btn-primary" onclick="window.location.href = '/publish/{{name}}';">
+                Publish Site!</button>
+            <span class="input-group-text" id="basic-addon1">Quick Insert:</span>
+            <div class="btn-group" role="group" aria-label="Quick Actions">
+                <button type="button" class="btn btn-primary" onclick="insertAtCursor('Navbar');" aria-describedby="basic-addon1">
+                    Navbar</button><button type="button" class="btn btn-primary" onclick="insertAtCursor('Link');">
+                    Link
+                </button>
+                <button type="button" class="btn btn-primary" onclick="insertAtCursor('Form');">
+                    Form
+                </button>
+                <button type="button" class="btn btn-primary" onclick="insertAtCursor('Button');">
+                    Button
+                </button>
+                <button type="button" class="btn btn-primary" onclick="insertAtCursor('Link');">
+                    Link
+                </button>
+                <button type="button" class="btn btn-primary" onclick="insertAtCursor('Card');">
+                    Card
+                </button>
+                <button type="button" class="btn btn-primary" onclick="insertAtCursor('Image');">
+                    Image
+                </button>
+                <button type="button" class="btn btn-primary" onclick="insertAtCursor('Video');">
+                    Video
+                </button>
+                <button type="button" class="btn btn-primary" onclick="insertAtCursor('Line-Break');">
+                    Line Break
+                </button>
+                <button type="button" class="btn btn-primary" onclick="insertAtCursor('Testimonial');">
+                    Testimonial
+                </button>
+                <button type="button" class="btn btn-primary" onclick="insertAtCursor('Inner-Section');">
+                    Inner Section
+                </button>
+                <button type="button" class="btn btn-primary" onclick="insertAtCursor('Text-Editor');">
+                    Text Editor
+                </button>
+            </div>
         </div>
         <div id="highlight"></div>
     </div>

@@ -146,7 +146,7 @@ function createDomTree() {
 
     function walkElement(element, indent = 0) {
         if (!(element.id == "preview")) {
-            domTree.appendChild(document.createTextNode("  ".repeat(indent)));
+            domTree.appendChild(document.createTextNode(" ".repeat(indent)));
 
             var span = document.createElement("span");
             span.textContent = "<" + element.tagName.toLowerCase() + ">";

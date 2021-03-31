@@ -203,15 +203,10 @@ def publish(sitename=None):
     if not sitename:
         flash("An Internal Error Occured! This has been reported and will be resolved soon. Thanks for the patience!", category="error")
     if request.method == "POST":
-        publish_check = request.form.get("publish")
-        if publish_check == 'on':
-            if d_publish(session.get("username"), session.get("email"), sitename):
-                flash("Successfully published!", category="success")
-                return redirect(url_for("site.edit", sitename=sitename))
-            else:
-                flash("Site could not be published!", category="error")
-                return redirect(url_for("site.edit", sitename=sitename))
+        if d_publish(session.get("username"), session.get("email"), sitename):
+            flash("Successfully published!", category="success")
+            return redirect(url_for("site.edit", sitename=sitename))
         flash("Site was not published.", category="success")
         return redirect(url_for("site.edit", sitename=sitename))
-    return render_template("Publish/publish.html")
+    return render_template("Publish/publish.html", site=sitename)
     
