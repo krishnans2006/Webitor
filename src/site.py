@@ -164,25 +164,21 @@ def projects():
 
 @site.route('/create', methods=["GET", "POST"])
 def create():
-    styles = ['Cool-Breeze', 'Sunrise', 'Dark-Mountain']
-    types = ['Test', 'Test2']
     if not session.get('logged_in'):
         flash("You must login to create a website!", category='error')
         return redirect(url_for("site.login"))
     else:
         if request.method == "POST":
             web_name = request.form.get("web-name")
-            web_style = request.form.get("web-style")
-            web_type = request.form.get("web-type")
-            gen_code = generator(web_style, web_type)
+            gen_code = generator()
             if d_create(session.get('username'), session.get('email'), web_name, gen_code):
-                flash(f"You chose {web_name} {web_style} {web_type}!", category='success')
+                flash(f"Successfully created site {web_name}!", category='success')
                 return redirect(url_for("site.edit", sitename=web_name))
             else:
                 flash(f"A site with this name already exists! Please try again with another sitename.", category='error')
                 return redirect(url_for("site.create"))
         else:
-            return render_template('Create/create.html', styles=styles, types=types)
+            return render_template('Create/create.html')
 
 
 @site.route('/edit/<sitename>', methods=["GET", "POST"])
