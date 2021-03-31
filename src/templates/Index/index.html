@@ -25,8 +25,8 @@
                 <img src="{{url_for('static', filename='logo.png')}}" alt="" width="36" height="30" /> Webitor
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
                     {% if session.get("logged_in") %}
@@ -38,135 +38,103 @@
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link disabled" tabindex="-1" aria-disabled="true" style="cursor: not-allowed">Create Site</a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link disabled"
-                tabindex="-1"
-                aria-disabled="true"
-                style="cursor: not-allowed"
-                >My Sites</a
-              >
-            </li>
-            {% endif %}
-          </ul>
-          <ul class="navbar-nav mb-2 mb-lg-0">
-            {% if session.get("logged_in") %}
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                My Account
-              </a>
+                        <a class="nav-link disabled" tabindex="-1" aria-disabled="true" style="cursor: not-allowed">Create Site</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" tabindex="-1" aria-disabled="true" style="cursor: not-allowed">My
+                            Sites</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    {% if session.get("logged_in") %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            My Account
+                        </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li>
-                                <a class="dropdown-item" href="/change-password">Change Password</a
-                  >
-                </li>
-                <li>
-                  <a class="dropdown-item" href="/delete-account"
-                    >Delete Account</a
-                  >
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="btn btn-primary navbar-btn" href="/logout">Log Out</a>
+                                <a class="dropdown-item" href="/change-password">Change Password</a>
                             </li>
-                            {% else %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="/login">Log In</a>
+                            <li>
+                                <a class="dropdown-item" href="/delete-account">Delete Account</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="btn btn-primary navbar-btn" href="/register">Register</a
-              >
-            </li>
-            {% endif %}
-          </ul>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary navbar-btn" href="/logout">Log Out</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary navbar-btn" href="/register">Register</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
         </div>
-      </div>
     </nav>
     <div class="container-lg">
-      <!-- Displays User Alerts -->
-      {% for category, message in get_flashed_messages(with_categories=true) %}
-      {% if category == "error" %}
-      <div classs="container p-5 full-alert">
-        <div class="row no-gutters">
-          <div class="alert alert-gradient-error shadow" role="alert">
-            <button
-              type="button"
-              class="close"
-              data-dismiss="alert"
-              aria-label="Close"
-            >
-              <span aria-hidden="true" style="color: #fff">&times;</span>
-            </button>
-            <h4 class="alert-heading-gradient">Uh, oh!</h4>
-            <p class="lead mb-0">{{message}}</p>
-          </div>
+        <!-- Displays User Alerts -->
+        {% for category, message in get_flashed_messages(with_categories=true) %} {% if category == "error" %}
+        <div classs="container p-5 full-alert">
+            <div class="row no-gutters">
+                <div class="alert alert-gradient-error shadow" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true" style="color: #fff">&times;</span>
+                    </button>
+                    <h4 class="alert-heading-gradient">Uh, oh!</h4>
+                    <p class="lead mb-0">{{message}}</p>
+                </div>
+            </div>
         </div>
-      </div>
 
-      {% elif category == "success" %}
-      <div classs="container p-5 full-alert">
-        <div class="row no-gutters">
-          <div class="alert alert-gradient-success shadow" role="alert">
-            <button
-              type="button"
-              class="close"
-              data-dismiss="alert"
-              aria-label="Close"
-            >
-              <span aria-hidden="true" style="color: #fff">&times;</span>
-            </button>
-            <h4 class="alert-heading-gradient">Success!</h4>
-            <p class="lead mb-0">{{message}}</p>
-          </div>
+        {% elif category == "success" %}
+        <div classs="container p-5 full-alert">
+            <div class="row no-gutters">
+                <div class="alert alert-gradient-success shadow" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true" style="color: #fff">&times;</span>
+                    </button>
+                    <h4 class="alert-heading-gradient">Success!</h4>
+                    <p class="lead mb-0">{{message}}</p>
+                </div>
+            </div>
         </div>
-      </div>
 
-      {% endif %} {% endfor %}
+        {% endif %} {% endfor %}
 
-      <!--<center><img src="{{url_for('static', filename='full.png')}}" /></center>-->
-      <div class="container">
-        <div class="inner-container">
-      <h1 class="main-title">Simple. Clean. Modern.</h1>
-      <h4 class="main-subtitle">The future of web design.</h4>
-      <button href="/register" class="submit">
-        <span class="login-text">Get Started</span>
-      </button>
-      <p class="about-section">Our project Webitor is a project we have came up with to be able to assist those to make a website without going through the stress of writing high amounts of code. We have made this to be able to showcase complex features for a website, all at the finger tips of a simple system which generates code, and adds code to your website all at the click of a button. We have also brought a complex code editor, to format your code automatically, and make it easy to add your own custom styles! This project we have built we believe is unique, innovative and a great start to the grand scheme of web design, and we hope you enjoy it.</p>
-      <h2 class="cta-title">Build your dreams.</h2>
-      <button class="submit" href="/register"><span class="login-text">Start Now</span></button>
-      </div>
-      </div>
+        <!--<center><img src="{{url_for('static', filename='full.png')}}" /></center>-->
     </div>
-    <script
-      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
-      crossorigin="anonymous"
-    ></script>
+    </div>
+    <center>
+        <div class="container">
+            <div class="inner-container">
+                <img src="{{url_for('static', filename='full.png')}}" />
+                <iframe src="{{youtube}}" height="500" width="889" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <h1 class="main-title">Simple. Clean. Modern.</h1>
+                <h4 class="main-subtitle">The future of web design.</h4>
+                <button href="/register" class="submit">
+            <span class="login-text">Get Started</span>
+          </button>
+                <div class="card">
+                    <div class="card-body">
+                        <p class="about-section">Our project Webitor is a project we have came up with to be able to assist those to make a website without going through the stress of writing high amounts of code. We have made this to be able to showcase complex features for
+                            a website, all at the finger tips of a simple system which generates code, and adds code to your website all at the click of a button. We have also brought a complex code editor, to format your code automatically, and make
+                            it easy to add your own custom styles! This project we have built we believe is unique, innovative and a great start to the grand scheme of web design, and we hope you enjoy it.</p>
+                    </div>
+                </div>
+                <h2 class="cta-title">Build your dreams.</h2>
+                <button class="submit" href="/register"><span class="login-text">Start Now</span></button>
+    </center>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
     <script src="{{url_for('static', filename='Index/index.js')}}"></script>
-  </body>
+</body>
+
 </html>
