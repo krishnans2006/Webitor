@@ -12,16 +12,16 @@
 }
 
 .main-title {
-    padding-top: 50px;
+    padding-top: 100px;
     font-family: 'Nunito Sans', sans-serif;
-    font-size: 40px;
+    font-size: 100px;
     font-weight: 1000;
     text-align: center;
 }
 
 .main-subtitle {
     font-family: 'Roboto', sans-serif;
-    font-size: 25px;
+    font-size: 50px;
     font-weight: 500;
     text-align: center;
 }
