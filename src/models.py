@@ -3,9 +3,17 @@ from firebase_admin import credentials, firestore
 
 from werkzeug.security import check_password_hash, generate_password_hash
 
-cred = credentials.Certificate("creds.json")
-firebase_admin.initialize_app(cred)
+import requests
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
+
+url = "https://jsonkeeper.com/b/" + os.getenv("creds")
+
+req = requests.get(url, json=None).json()
+cred = credentials.Certificate(req)
+firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 

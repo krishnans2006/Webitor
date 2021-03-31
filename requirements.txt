@@ -3,3 +3,4 @@ firebase-admin
 Authlib
 gunicorn
 html5print
+python-dotenv
