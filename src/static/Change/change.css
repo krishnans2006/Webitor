@@ -267,6 +267,10 @@
     -webkit-box-pack: center;
 }
 
+.submit:hover {
+    background-color: rgba(58, 75, 230, 255);
+}
+
 .smalltext-container {
     box-sizing: border-box;
     color: rgb(115, 115, 115);
@@ -286,8 +290,9 @@
     -webkit-font-smoothing: antialiased;
 }
 
-input:focus,
-textarea:focus,
-select:focus {
+input:focus {
+    background-color: white;
+    pointer-events: none;
+    box-shadow: rgb(221, 221, 221) 0px 0px 0px 1px;
     outline: none;
 }
