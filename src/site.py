@@ -106,7 +106,7 @@ def register():
                 if not num:
                     num = 0
                 num += 1
-                f_username = username + num
+                f_username = username + str(num)
             session["logged_in"] = True
             session["username"] = f_username
             session["email"] = email
