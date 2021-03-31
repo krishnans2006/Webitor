@@ -170,5 +170,22 @@ def d_publish(username, email, sitename):
     )
     return True
 
+
+def d_unpublish(username, email, sitename):
+    if not db.collection("Sites").document(sitename).get().exists:
+        return False
+    if username:
+        if not get("Sites", sitename, "Creator") == db.collection("Users").document(username):
+            return False
+    else:
+        if not get("Sites", sitename, "Creator") == db.collection("Google-Users").document(email):
+            return False
+    db.collection("Sites").document(sitename).update(
+        {
+            "Published": False
+        }
+    )
+    return True
+
 def d_get_published_sites():
     return list(db.collection("Sites").where("Published", "==", True).stream())

@@ -18,7 +18,6 @@ def index():
 
 @site.route("/s/<sitename>")
 def official_site(sitename):
-    print("Accessing published site", sitename)
     site_code = d_site(sitename)
     if not site_code:
         flash("This site either doesn't exist, or is not published yet. Please make sure the site name is correct!", category="error")
@@ -44,7 +43,6 @@ def google_auth():
     try:
         idinfo = id_token.verify_oauth2_token(token, requests.Request(
         ), "337745045052-c19u56smhk30nck0dat09vigoe7fcolf.apps.googleusercontent.com")
-        print("Email", idinfo["email"])
         result = d_gauth(idinfo["email"])
         if result:
             flash(f"You have successfully logged back in as {idinfo['email']}!", category='success')
@@ -79,7 +77,6 @@ def login():
                 return redirect(url_for("site.login"))
         else:
             flash("Please fill in the empty fields!", category="error")
-            print("Hello")
             return redirect(url_for('site.login'))
 
     return render_template('Login/login.html')
@@ -193,7 +190,7 @@ def edit(sitename=None):
         d_edit(session.get("username"), session.get("email"), sitename, new_code)
         return ""
     site = d_get_site(session.get("username"), session.get("email"), sitename)
-    return render_template('Edit/edit.html', name=site[0], code=site[1]["HTML"])
+    return render_template('Edit/edit.html', name=site[0], code=site[1]["HTML"], published=site[1]["Published"])
 
 @site.route('/publish/<sitename>', methods=["GET", "POST"])
 def publish(sitename=None):
@@ -205,8 +202,23 @@ def publish(sitename=None):
     if request.method == "POST":
         if d_publish(session.get("username"), session.get("email"), sitename):
             flash("Successfully published!", category="success")
-            return redirect(url_for("site.edit", sitename=sitename))
-        flash("Site was not published.", category="success")
+            return redirect(url_for("site.official_site", sitename=sitename))
+        flash("Site was not published.", category="error")
         return redirect(url_for("site.edit", sitename=sitename))
     return render_template("Publish/publish.html", site=sitename)
-    
+
+
+@site.route('/unpublish/<sitename>', methods=["GET", "POST"])
+def unpublish(sitename=None):
+    if not session.get('logged_in'):
+        flash("You must be logged in to edit your projects!", category='error')
+        return redirect(url_for('site.login'))
+    if not sitename:
+        flash("An Internal Error Occured! This has been reported and will be resolved soon. Thanks for the patience!", category="error")
+    if request.method == "POST":
+        if d_unpublish(session.get("username"), session.get("email"), sitename):
+            flash("Successfully unpublished!", category="success")
+            return redirect(url_for("site.edit", sitename=sitename))
+        flash("Site is still published.", category="error")
+        return redirect(url_for("site.official_site", sitename=sitename))
+    return render_template("Unpublish/unpublish.html", site=sitename)
