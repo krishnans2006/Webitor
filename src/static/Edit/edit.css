@@ -37,3 +37,9 @@
 .dom-element.selected {
   background-color: yellow;
 }
+
+#basic-addon1 {
+    margin-left: 10px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
