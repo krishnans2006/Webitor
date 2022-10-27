@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-url = "https://jsonkeeper.com/b/" + os.getenv("creds")
+url = "https://www.jsonkeeper.com/b/" + os.getenv("creds")
 
 req = requests.get(url, json=None).json()
 cred = credentials.Certificate(req)
